@@ -433,3 +433,25 @@ p{color:#4f4334}
   .right-rail{display:block}
   .right-rail .rail-ad{margin:22px 0}
 }
+
+/* D1-managed advertisement content */
+.ad-db-caption{
+  position:relative;
+  z-index:2;
+  display:block;
+  padding:.5rem .7rem;
+  border-top:1px solid var(--rule);
+  background:var(--paper-light);
+  color:var(--muted);
+  font-family:var(--serif);
+  font-size:.78rem;
+  line-height:1.35;
+}
+.ad-link[data-ad-loaded="fallback"] img{visibility:visible}
+
+
+
+/* D1 is the advertisement source of truth.
+   Static placeholder markup stays hidden until a matching D1 row loads a valid creative. */
+.ad-link[data-ad-slot]{display:none!important}
+.ad-link[data-ad-slot][data-ad-loaded="true"]{display:block!important}
