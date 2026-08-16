@@ -136,5 +136,34 @@
     }
   };
 
+
+
+  // Published D1 events loader.
+  const EVENTS_API_URL = 'https://worker-d1-public.thehootandhollerpress.workers.dev/events';
+  const eventDateLabel = value => {
+    const raw = String(value || '').trim(); if (!raw) return 'Date TBA';
+    const d = new Date(raw + 'T12:00:00');
+    return Number.isNaN(d.getTime()) ? raw : d.toLocaleDateString(undefined, { weekday:'short', month:'short', day:'numeric' });
+  };
+  const eventMeta = ev => [eventDateLabel(ev.event_date), String(ev.event_time || '').trim(), String(ev.location || '').trim()].filter(Boolean).join(' • ');
+  const safePublicUrl = value => { const u=String(value||'').trim(); return /^https?:\/\//i.test(u) ? u : ''; };
+  const renderHomeEvents = events => {
+    const host=document.querySelector('[data-events-home]'); if(!host) return; host.innerHTML='';
+    const rows=events.slice(0,3); if(!rows.length){ const p=document.createElement('p'); p.className='events-empty-public'; p.textContent='No published events yet.'; host.appendChild(p); return; }
+    rows.forEach(ev=>{ const item=document.createElement('div'); item.className='home-event-item'; const title=document.createElement('strong'); title.textContent=ev.title||'Untitled event'; const meta=document.createElement('div'); meta.className='event-meta'; meta.textContent=eventMeta(ev); item.append(title,meta); host.appendChild(item); });
+  };
+  const renderCommunityEvents = events => {
+    const host=document.querySelector('[data-events-list]'); if(!host) return; host.innerHTML='';
+    if(!events.length){ const p=document.createElement('p'); p.className='events-empty-public'; p.textContent='No published events yet.'; host.appendChild(p); return; }
+    events.slice(0,24).forEach(ev=>{ const card=document.createElement('article'); card.className='community-event-card'; const meta=document.createElement('div'); meta.className='event-meta'; meta.textContent=eventMeta(ev); const h=document.createElement('h3'); h.textContent=ev.title||'Untitled event'; card.append(meta,h); if(ev.description){ const p=document.createElement('p'); p.textContent=ev.description; card.appendChild(p); } const u=safePublicUrl(ev.source_url); if(u){ const a=document.createElement('a'); a.href=u; a.target='_blank'; a.rel='noopener noreferrer'; a.textContent='Event details →'; card.appendChild(a); } host.appendChild(card); });
+  };
+  const loadPublishedEvents = async () => {
+    if (!document.querySelector('[data-events-home],[data-events-list]')) return;
+    try { const r=await fetch(EVENTS_API_URL,{headers:{Accept:'application/json'},cache:'no-store'}); if(!r.ok) throw new Error(`Events API returned ${r.status}`); const data=await r.json(); const rows=Array.isArray(data)?data:[]; renderHomeEvents(rows); renderCommunityEvents(rows); }
+    catch(err){ console.warn('Events feed unavailable.',err); renderHomeEvents([]); renderCommunityEvents([]); }
+  };
+
+  loadPublishedEvents();
+
   loadAdvertisements();
 })();
