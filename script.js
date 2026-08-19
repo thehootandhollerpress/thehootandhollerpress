@@ -11,7 +11,56 @@
   const poll = document.querySelector('#reader-poll');
   if (poll) { const status=poll.querySelector('.poll-status'); const saved=localStorage.getItem('hoot-holler-poll'); if(saved){ const input=poll.querySelector(`input[value="${saved}"]`); if(input) input.checked=true; status.textContent='Your last choice is saved on this browser.'; } poll.addEventListener('submit',e=>{e.preventDefault(); const picked=new FormData(poll).get('poll'); if(!picked){status.textContent='Choose one first.';return;} localStorage.setItem('hoot-holler-poll',picked);status.textContent='Vote saved on this browser. Thanks for weighing in.';}); }
   const form = document.querySelector('#contact-form');
-  if (form) form.addEventListener('submit', e => { e.preventDefault(); const data=new FormData(form); const topic=data.get('topic')||'Website contact'; const body=`Name: ${data.get('name')}\nEmail: ${data.get('email')}\nTopic: ${topic}\n\n${data.get('message')}`; location.href=`mailto:contact@thehootandhollerpress.com?subject=${encodeURIComponent('Hoot & Holler: '+topic)}&body=${encodeURIComponent(body)}`; });
+  if (form) {
+    const submitButton = form.querySelector('button[type="submit"]');
+    const status = form.querySelector('#contact-form-status');
+
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      if (!form.reportValidity()) return;
+
+      const originalButtonText = submitButton ? submitButton.textContent : 'Send message';
+
+      if (submitButton) {
+        submitButton.disabled = true;
+        submitButton.textContent = 'Sending...';
+      }
+      if (status) {
+        status.dataset.state = 'sending';
+        status.textContent = 'Sending your message...';
+      }
+
+      try {
+        const data = new FormData(form);
+        const body = new URLSearchParams();
+        data.forEach((value, key) => body.append(key, String(value)));
+
+        await fetch(form.action, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+          body: body.toString()
+        });
+
+        form.reset();
+        if (status) {
+          status.dataset.state = 'success';
+          status.textContent = 'Thanks — your message has been sent.';
+        }
+      } catch (error) {
+        console.error('Contact form submission failed:', error);
+        if (status) {
+          status.dataset.state = 'error';
+          status.textContent = 'The message could not be sent. Please try again.';
+        }
+      } finally {
+        if (submitButton) {
+          submitButton.disabled = false;
+          submitButton.textContent = originalButtonText;
+        }
+      }
+    });
+  }
 
 
   // Public D1 advertisement loader.

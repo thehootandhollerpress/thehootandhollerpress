@@ -459,3 +459,11 @@ p{color:#4f4334}
 
 /* D1 published events */
 .home-events-list{display:grid;gap:.75rem;margin:1rem 0}.home-event-item{padding:.7rem 0;border-bottom:1px solid var(--rule)}.home-event-item:last-child{border-bottom:0}.home-event-item strong{display:block;font-family:var(--serif);font-size:1.05rem}.event-meta{font-size:.72rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);margin-top:.2rem}.community-events{border-bottom:1px solid var(--rule)}.community-events-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0;border-top:1px solid var(--ink)}.community-event-card{padding:24px 28px 24px 0;border-bottom:1px solid var(--rule)}.community-event-card:nth-child(even){padding-left:28px;border-left:1px solid var(--rule)}.community-event-card h3{margin:.4rem 0 .55rem}.community-event-card p{font-family:var(--serif);margin-bottom:.65rem}.community-event-card a{font-size:.7rem;text-transform:uppercase;font-weight:900;letter-spacing:.08em;border-bottom:1px solid}.events-empty-public{padding:24px 0;color:var(--muted);font-family:var(--serif)}@media(max-width:720px){.community-events-list{grid-template-columns:1fr}.community-event-card,.community-event-card:nth-child(even){padding:20px 0;border-left:0}}
+
+/* Google Apps Script contact form status */
+.form-status{margin:0;min-height:1.25rem}
+.form-status[data-state="sending"]{color:var(--muted);font-weight:700}
+.form-status[data-state="success"]{color:var(--forest);font-weight:900}
+.form-status[data-state="error"]{color:var(--rust);font-weight:900}
+.contact-form .btn:disabled{opacity:.62;cursor:wait;transform:none;filter:none}
+
