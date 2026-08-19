@@ -17,7 +17,19 @@
 
     form.addEventListener('submit', async e => {
       e.preventDefault();
+
       if (!form.reportValidity()) return;
+
+      const data = new FormData(form);
+      const turnstileToken = String(data.get('cf-turnstile-response') || '').trim();
+
+      if (!turnstileToken) {
+        if (status) {
+          status.dataset.state = 'error';
+          status.textContent = 'Please complete the anti-spam verification.';
+        }
+        return;
+      }
 
       const originalButtonText = submitButton ? submitButton.textContent : 'Send message';
 
@@ -31,27 +43,32 @@
       }
 
       try {
-        const data = new FormData(form);
-        const body = new URLSearchParams();
-        data.forEach((value, key) => body.append(key, String(value)));
-
         await fetch(form.action, {
           method: 'POST',
           mode: 'no-cors',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
-          body: body.toString()
+          body: data
         });
 
         form.reset();
+
+        if (window.turnstile && typeof window.turnstile.reset === 'function') {
+          window.turnstile.reset();
+        }
+
         if (status) {
           status.dataset.state = 'success';
-          status.textContent = 'Thanks — your message has been sent.';
+          status.textContent = 'Thanks — your message has been submitted.';
         }
       } catch (error) {
         console.error('Contact form submission failed:', error);
+
+        if (window.turnstile && typeof window.turnstile.reset === 'function') {
+          window.turnstile.reset();
+        }
+
         if (status) {
           status.dataset.state = 'error';
-          status.textContent = 'The message could not be sent. Please try again.';
+          status.textContent = 'The message could not be submitted. Please try again.';
         }
       } finally {
         if (submitButton) {
@@ -62,8 +79,7 @@
     });
   }
 
-
-  // Public D1 advertisement loader.
+// Public D1 advertisement loader.
   // D1 is the source of truth: slots stay hidden unless a matching row has a valid image_path.
   const ADS_API_URL = 'https://worker-d1-public.thehootandhollerpress.workers.dev/ads';
 
