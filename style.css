@@ -4,11 +4,7 @@
 @media (max-width:720px){.shell{width:min(100% - 24px,1180px)}.utility-inner{grid-template-columns:1fr}.utility-inner a{display:none}.masthead-shell{padding:12px 0}.nav-toggle{display:block}.site-nav{display:none;position:absolute;left:-12px;right:-12px;top:100%;background:var(--paper-light);border:1px solid var(--ink);flex-direction:column;box-shadow:var(--shadow)}.site-nav.open{display:flex}.site-nav a{border-bottom:1px solid var(--rule);padding:.85rem 1rem}.section{padding:50px 0}.section-tight{padding:28px 0}h1{font-size:clamp(2.7rem,14vw,4.4rem)}h2{font-size:clamp(2.15rem,10vw,3.5rem)}.lead-grid{gap:28px;padding-top:38px}.lead-story{padding-right:0}.lead-art{box-shadow:10px 12px 0 rgba(57,44,30,.08)}.issue-band{padding:42px 0}.issue-band-grid{grid-template-columns:1fr}.issue-cover-mini{max-width:290px}.section-head{grid-template-columns:1fr;gap:.4rem}.section-head>a{width:max-content}.brief-grid,.fun-grid{grid-template-columns:1fr}.lead-brief{grid-row:auto}.brief,.brief:nth-child(2),.brief:nth-child(3){padding:20px 0;border-left:0}.reader-poll{border-left:0;border-top:1px solid var(--rule);padding:24px 0}.right-rail{grid-template-columns:1fr}.rail-section{grid-column:auto}.paper-break-grid{gap:22px}.issue-reader{grid-template-columns:1fr}.issue-cover-large{max-width:360px}.distribution-map img{min-height:330px}.process-grid{grid-template-columns:1fr}.process-grid>div:first-child{grid-column:auto}.process-step{border-left:0;border-top:1px solid #6e8190;padding:18px 0 0}.spec-table>div{grid-template-columns:1fr 1fr}.spec-table>div span:last-child{grid-column:1/-1}.placement-copy li{grid-template-columns:1fr;gap:4px}.footer-grid{grid-template-columns:1fr;gap:30px}.footer-bottom{flex-direction:column;gap:.4rem}.contact-side{border-top:1px solid var(--rule);padding-top:28px}}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn:hover{transform:none}}
 
-/* ==========================================================
-   2026 RUSTIC EDITORIAL THEME
-   Old-world newspaper atmosphere: parchment, midnight ink,
-   brass rules, celestial ornaments, and hand-printed texture.
-   ========================================================== */
+
 :root{
   --paper:#efe0bf;
   --paper-deep:#dcc79e;
@@ -324,11 +320,7 @@ p{color:#4f4334}
 @media (max-width:700px){.photo-credit{float:none;display:block;margin-top:.25rem}.lead-art img{min-height:220px}.distribution-map img{min-height:240px;aspect-ratio:4/3}}
 
 
-/* ==========================================================
-   V8 LAYOUT POLISH
-   Smaller masthead, cleaner utility bar, reliable ad slots,
-   and stronger phone behavior.
-   ========================================================== */
+
 .utility-inner{
   grid-template-columns:1fr 1fr;
   gap:18px;
@@ -394,7 +386,7 @@ p{color:#4f4334}
   .ad-fallback strong{font-size:1.05rem}
 }
 
-/* v9: leaderboard crop guard. Keep the entire creative inside the slot on every viewport. */
+
 .home-leaderboard{overflow:visible}
 .ad-leaderboard{display:block;width:100%;max-width:100%;overflow:hidden}
 .ad-leaderboard picture,.ad-leaderboard img{
@@ -414,7 +406,7 @@ p{color:#4f4334}
 }
 
 
-/* v10: expanded homepage advertising rail */
+
 .rail-heading{
   margin-bottom:18px;
   padding:0 0 14px;
@@ -434,7 +426,7 @@ p{color:#4f4334}
   .right-rail .rail-ad{margin:22px 0}
 }
 
-/* D1-managed advertisement content */
+
 .ad-db-caption{
   position:relative;
   z-index:2;
@@ -451,16 +443,15 @@ p{color:#4f4334}
 
 
 
-/* D1 is the advertisement source of truth.
-   Static placeholder markup stays hidden until a matching D1 row loads a valid creative. */
+
 .ad-link[data-ad-slot]{display:none!important}
 .ad-link[data-ad-slot][data-ad-loaded="true"]{display:block!important}
 
 
-/* D1 published events */
+
 .home-events-list{display:grid;gap:.75rem;margin:1rem 0}.home-event-item{padding:.7rem 0;border-bottom:1px solid var(--rule)}.home-event-item:last-child{border-bottom:0}.home-event-item strong{display:block;font-family:var(--serif);font-size:1.05rem}.event-meta{font-size:.72rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);margin-top:.2rem}.community-events{border-bottom:1px solid var(--rule)}.community-events-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0;border-top:1px solid var(--ink)}.community-event-card{padding:24px 28px 24px 0;border-bottom:1px solid var(--rule)}.community-event-card:nth-child(even){padding-left:28px;border-left:1px solid var(--rule)}.community-event-card h3{margin:.4rem 0 .55rem}.community-event-card p{font-family:var(--serif);margin-bottom:.65rem}.community-event-card a{font-size:.7rem;text-transform:uppercase;font-weight:900;letter-spacing:.08em;border-bottom:1px solid}.events-empty-public{padding:24px 0;color:var(--muted);font-family:var(--serif)}@media(max-width:720px){.community-events-list{grid-template-columns:1fr}.community-event-card,.community-event-card:nth-child(even){padding:20px 0;border-left:0}}
 
-/* Cloudflare Turnstile contact form */
+
 .turnstile-wrap{
   width:100%;
   padding:.2rem 0;
@@ -493,3 +484,19 @@ p{color:#4f4334}
   filter:none;
 }
 
+/* Owl logo bounce on hover */
+img[src$="owl-mark.svg"]{
+  transition:transform .2s ease;
+  transform-origin:center bottom;
+}
+
+img[src$="owl-mark.svg"]:hover{
+  animation:owl-bounce .55s ease;
+}
+
+@keyframes owl-bounce{
+  0%,100%{transform:translateY(0)}
+  30%{transform:translateY(-10px)}
+  55%{transform:translateY(0)}
+  75%{transform:translateY(-5px)}
+}
