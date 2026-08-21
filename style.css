@@ -489,7 +489,7 @@ p{color:#4f4334}
    ========================================================= */
 .site-footer{
   position:relative;
-  overflow:hidden;
+  overflow:visible;
   padding-top:38px;
   color:#f4ead7;
   background:
@@ -516,7 +516,7 @@ p{color:#4f4334}
 
 .footer-ad{
   position:relative;
-  z-index:2;
+  z-index:1;
   padding-bottom:34px;
   border-bottom:1px solid #52616b;
 }
@@ -524,7 +524,7 @@ p{color:#4f4334}
 
 .footer-main{
   position:relative;
-  z-index:1;
+  z-index:4;
   margin-top:100px;
   padding-top:126px;
   border-top:1px solid rgba(210,154,74,.52);
@@ -575,6 +575,7 @@ p{color:#4f4334}
 }
 
 .footer-owl-spin-ring{
+  display:block;
   position:absolute;
   left:50%;
   top:50%;
@@ -585,6 +586,9 @@ p{color:#4f4334}
   border:2px dashed rgba(210,154,74,.88);
   border-radius:50%;
   pointer-events:none;
+  transform-origin:50% 50%;
+  backface-visibility:hidden;
+  will-change:transform;
   animation:footer-ring-spin 11s linear infinite;
 }
 .footer-owl-spin-ring-outer{
@@ -882,8 +886,14 @@ p{color:#4f4334}
   0%,100%{opacity:.72;transform:scale(.96)}
   50%{opacity:1;transform:scale(1.05)}
 }
-@keyframes footer-ring-spin{to{transform:rotate(360deg)}}
-@keyframes footer-ring-spin-reverse{to{transform:rotate(-360deg)}}
+@keyframes footer-ring-spin{
+  from{transform:rotate(0deg)}
+  to{transform:rotate(360deg)}
+}
+@keyframes footer-ring-spin-reverse{
+  from{transform:rotate(0deg)}
+  to{transform:rotate(-360deg)}
+}
 @keyframes footer-orbit-a{
   from{transform:rotate(0deg) translateX(112px) rotate(0deg)}
   to{transform:rotate(360deg) translateX(112px) rotate(-360deg)}
@@ -938,6 +948,13 @@ p{color:#4f4334}
     width:198px;
     height:198px;
     margin:-99px 0 0 -99px;
+    background:none;
+    -webkit-mask:none;
+    mask:none;
+    border:2px solid rgba(246,234,215,.24);
+    border-top-color:rgba(210,154,74,.95);
+    border-right-color:rgba(210,154,74,.55);
+    border-bottom-color:rgba(246,234,215,.38);
   }
   .footer-orbit-dot-a{animation-name:footer-orbit-a-mobile}
   .footer-orbit-dot-b{animation-name:footer-orbit-b-mobile}
@@ -946,17 +963,18 @@ p{color:#4f4334}
     width:min(340px,72vw);
   }
   .footer-hoot{
-    left:50%;
-    top:-52px;
-    transform:translate(-50%,8px) rotate(2deg) scale(.85);
+    left:116px;
+    top:-4px;
+    z-index:30;
+    transform:translateY(8px) rotate(4deg) scale(.85);
   }
   .footer-hoot::after{
-    left:50%;
-    margin-left:-6px;
+    left:12px;
+    margin-left:0;
   }
   .footer-owl-stage.is-hooting .footer-hoot,
   .footer-owl-stage:focus-visible .footer-hoot{
-    transform:translate(-50%,0) rotate(2deg) scale(1);
+    transform:translateY(0) rotate(4deg) scale(1);
   }
   .footer-grid.footer-grid-animated{
     grid-template-columns:1fr;
@@ -1002,6 +1020,13 @@ p{color:#4f4334}
     width:186px;
     height:186px;
     margin:-93px 0 0 -93px;
+    background:none;
+    -webkit-mask:none;
+    mask:none;
+    border:2px solid rgba(246,234,215,.24);
+    border-top-color:rgba(210,154,74,.95);
+    border-right-color:rgba(210,154,74,.55);
+    border-bottom-color:rgba(246,234,215,.38);
   }
   .footer-perch{
     top:74px;
@@ -1020,13 +1045,51 @@ p{color:#4f4334}
 }
 
 @media (prefers-reduced-motion:reduce){
-  .footer-owl-glow,
-  .footer-owl-spin-ring,
-  .footer-orbit-dot,
-  .footer-owl-badge,
-  .contact-side img[src$="owl-mark.svg"]{
-    animation:none!important;
-  }
   .footer-owl-tilt{transform:none!important}
 }
 
+
+
+/* Firefox Android / touch hardening */
+@media (max-width:720px){
+  .footer-owl-stage,
+  .footer-owl-stage *{
+    -webkit-tap-highlight-color:transparent;
+  }
+
+  .footer-owl-spin-ring{
+    animation-name:footer-ring-spin;
+    animation-duration:11s;
+    animation-timing-function:linear;
+    animation-iteration-count:infinite;
+    animation-play-state:running;
+  }
+
+  .footer-owl-spin-ring-outer{
+    animation-name:footer-ring-spin-reverse;
+    animation-duration:16s;
+    animation-timing-function:linear;
+    animation-iteration-count:infinite;
+    animation-play-state:running;
+  }
+
+  .footer-owl-glow{
+    animation:footer-owl-glow 3.8s ease-in-out infinite;
+  }
+
+  .footer-orbit-dot-a{
+    animation:footer-orbit-a-mobile 7s linear infinite;
+  }
+
+  .footer-orbit-dot-b{
+    animation:footer-orbit-b-mobile 10s linear infinite;
+  }
+
+  .footer-owl-badge{
+    animation:footer-owl-idle 4.4s ease-in-out infinite;
+  }
+
+  .footer-owl-stage.is-bouncing .footer-owl-badge{
+    animation:footer-owl-bounce .74s cubic-bezier(.22,.9,.22,1);
+  }
+}

@@ -233,22 +233,45 @@
   document.querySelectorAll('.footer-owl-stage').forEach(owl => {
     const badge = owl.querySelector('.footer-owl-badge');
     let cleanupTimer = 0;
+    let lastTouchTrigger = 0;
 
     const replayOwl = () => {
       window.clearTimeout(cleanupTimer);
 
-      // Remove and re-add the classes after a forced reflow so every tap/click
-      // restarts the animation, including repeated taps on touch devices.
+      // Force Firefox/Android to see a fresh animation state on every tap.
       owl.classList.remove('is-bouncing', 'is-hooting');
-      void owl.offsetWidth;
-      owl.classList.add('is-bouncing', 'is-hooting');
+      if (badge) {
+        badge.style.animation = 'none';
+        void badge.offsetWidth;
+        badge.style.animation = '';
+      } else {
+        void owl.offsetWidth;
+      }
+
+      requestAnimationFrame(() => {
+        owl.classList.add('is-bouncing', 'is-hooting');
+      });
 
       cleanupTimer = window.setTimeout(() => {
         owl.classList.remove('is-bouncing', 'is-hooting');
       }, 950);
     };
 
-    owl.addEventListener('click', replayOwl);
+    // pointerup fires reliably on Firefox Android and avoids sticky :hover behavior.
+    owl.addEventListener('pointerup', event => {
+      if (event.pointerType === 'touch' || event.pointerType === 'pen') {
+        lastTouchTrigger = Date.now();
+        replayOwl();
+      }
+    });
+
+    // Keep normal mouse clicks and keyboard activation working without double-firing
+    // after a touch-generated click.
+    owl.addEventListener('click', () => {
+      if (Date.now() - lastTouchTrigger > 700) {
+        replayOwl();
+      }
+    });
 
     if (badge) {
       badge.addEventListener('animationend', event => {
@@ -277,16 +300,34 @@
     }
   });
 
-  // Make the standalone round owl on the contact page replay its bounce on
-  // every tap instead of relying on sticky mobile :hover behavior.
+  // Make the standalone round owl on the contact page replay its bounce
+  // on every tap, including Firefox Android.
   document.querySelectorAll('.contact-side img[src$="owl-mark.svg"]').forEach(owlImg => {
+    let lastTouchTrigger = 0;
+
     const replayMark = () => {
       owlImg.classList.remove('owl-tap-bounce');
+      owlImg.style.animation = 'none';
       void owlImg.offsetWidth;
-      owlImg.classList.add('owl-tap-bounce');
+      owlImg.style.animation = '';
+      requestAnimationFrame(() => {
+        owlImg.classList.add('owl-tap-bounce');
+      });
     };
 
-    owlImg.addEventListener('click', replayMark);
+    owlImg.addEventListener('pointerup', event => {
+      if (event.pointerType === 'touch' || event.pointerType === 'pen') {
+        lastTouchTrigger = Date.now();
+        replayMark();
+      }
+    });
+
+    owlImg.addEventListener('click', () => {
+      if (Date.now() - lastTouchTrigger > 700) {
+        replayMark();
+      }
+    });
+
     owlImg.addEventListener('animationend', event => {
       if (event.animationName === 'owl-mark-bounce') {
         owlImg.classList.remove('owl-tap-bounce');
