@@ -228,6 +228,72 @@
     catch(err){ console.warn('Events feed unavailable.',err); renderHomeEvents([]); renderCommunityEvents([]); }
   };
 
+
+  // Animated footer owl.
+  document.querySelectorAll('.footer-owl-stage').forEach(owl => {
+    const badge = owl.querySelector('.footer-owl-badge');
+    let cleanupTimer = 0;
+
+    const replayOwl = () => {
+      window.clearTimeout(cleanupTimer);
+
+      // Remove and re-add the classes after a forced reflow so every tap/click
+      // restarts the animation, including repeated taps on touch devices.
+      owl.classList.remove('is-bouncing', 'is-hooting');
+      void owl.offsetWidth;
+      owl.classList.add('is-bouncing', 'is-hooting');
+
+      cleanupTimer = window.setTimeout(() => {
+        owl.classList.remove('is-bouncing', 'is-hooting');
+      }, 950);
+    };
+
+    owl.addEventListener('click', replayOwl);
+
+    if (badge) {
+      badge.addEventListener('animationend', event => {
+        if (event.animationName === 'footer-owl-bounce') {
+          owl.classList.remove('is-bouncing');
+        }
+      });
+    }
+
+    const finePointer = window.matchMedia &&
+      window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+
+    if (finePointer) {
+      owl.addEventListener('mousemove', event => {
+        const rect = owl.getBoundingClientRect();
+        const x = (event.clientX - rect.left) / rect.width - 0.5;
+        const y = (event.clientY - rect.top) / rect.height - 0.5;
+        owl.style.setProperty('--footer-ry', `${(x * 10).toFixed(2)}deg`);
+        owl.style.setProperty('--footer-rx', `${(-y * 8).toFixed(2)}deg`);
+      });
+
+      owl.addEventListener('mouseleave', () => {
+        owl.style.setProperty('--footer-ry', '0deg');
+        owl.style.setProperty('--footer-rx', '0deg');
+      });
+    }
+  });
+
+  // Make the standalone round owl on the contact page replay its bounce on
+  // every tap instead of relying on sticky mobile :hover behavior.
+  document.querySelectorAll('.contact-side img[src$="owl-mark.svg"]').forEach(owlImg => {
+    const replayMark = () => {
+      owlImg.classList.remove('owl-tap-bounce');
+      void owlImg.offsetWidth;
+      owlImg.classList.add('owl-tap-bounce');
+    };
+
+    owlImg.addEventListener('click', replayMark);
+    owlImg.addEventListener('animationend', event => {
+      if (event.animationName === 'owl-mark-bounce') {
+        owlImg.classList.remove('owl-tap-bounce');
+      }
+    });
+  });
+
   loadPublishedEvents();
 
   loadAdvertisements();
