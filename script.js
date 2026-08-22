@@ -13,10 +13,22 @@
       a.setAttribute('aria-current', 'page');
     }
   });
-  const reveal = document.querySelector('.reveal-answer');
-  if (reveal) reveal.addEventListener('click', () => { const answers = document.querySelector('.answers'); const hidden = answers.hasAttribute('hidden'); if (hidden) answers.removeAttribute('hidden'); else answers.setAttribute('hidden',''); reveal.setAttribute('aria-expanded', String(hidden)); reveal.textContent = hidden ? 'Hide answers' : 'Reveal answers'; });
-  const poll = document.querySelector('#reader-poll');
-  if (poll) { const status=poll.querySelector('.poll-status'); const saved=localStorage.getItem('hoot-holler-poll'); if(saved){ const input=poll.querySelector(`input[value="${saved}"]`); if(input) input.checked=true; status.textContent='Your last choice is saved on this browser.'; } poll.addEventListener('submit',e=>{e.preventDefault(); const picked=new FormData(poll).get('poll'); if(!picked){status.textContent='Choose one first.';return;} localStorage.setItem('hoot-holler-poll',picked);status.textContent='Vote saved on this browser. Thanks for weighing in.';}); }
+  document.querySelectorAll('.reveal-answer').forEach(reveal => {
+    const section = reveal.closest('section');
+    const answers = section ? section.querySelector('.answers') : null;
+    if (!answers) return;
+
+    const showLabel = reveal.dataset.revealShow || reveal.textContent.trim() || 'Reveal';
+    const hideLabel = reveal.dataset.revealHide || showLabel.replace(/^Reveal/i, 'Hide');
+
+    reveal.addEventListener('click', () => {
+      const hidden = answers.hasAttribute('hidden');
+      if (hidden) answers.removeAttribute('hidden');
+      else answers.setAttribute('hidden', '');
+      reveal.setAttribute('aria-expanded', String(hidden));
+      reveal.textContent = hidden ? hideLabel : showLabel;
+    });
+  });
   const form = document.querySelector('#contact-form');
   if (form) {
     const submitButton = form.querySelector('button[type="submit"]');
