@@ -4,8 +4,15 @@
   const nav = document.querySelector('.site-nav');
   if (navToggle && nav) navToggle.addEventListener('click', () => { const open = nav.classList.toggle('open'); navToggle.setAttribute('aria-expanded', String(open)); });
   document.querySelectorAll('[data-year]').forEach(el => el.textContent = new Date().getFullYear());
-  const path = location.pathname.split('/').pop() || 'index.html';
-  document.querySelectorAll('.site-nav a').forEach(a => { if ((a.getAttribute('href')||'') === path) a.setAttribute('aria-current','page'); });
+  const path = location.pathname;
+  const currentNavHref = (path === '/' || path.endsWith('/index.html'))
+    ? '/'
+    : path.split('/').pop();
+  document.querySelectorAll('.site-nav a').forEach(a => {
+    if ((a.getAttribute('href') || '') === currentNavHref) {
+      a.setAttribute('aria-current', 'page');
+    }
+  });
   const reveal = document.querySelector('.reveal-answer');
   if (reveal) reveal.addEventListener('click', () => { const answers = document.querySelector('.answers'); const hidden = answers.hasAttribute('hidden'); if (hidden) answers.removeAttribute('hidden'); else answers.setAttribute('hidden',''); reveal.setAttribute('aria-expanded', String(hidden)); reveal.textContent = hidden ? 'Hide answers' : 'Reveal answers'; });
   const poll = document.querySelector('#reader-poll');
