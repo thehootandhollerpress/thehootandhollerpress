@@ -224,27 +224,258 @@
 
   // Published D1 events loader.
   const EVENTS_API_URL = 'https://worker-d1-public.thehootandhollerpress.workers.dev/events';
+
   const eventDateLabel = value => {
-    const raw = String(value || '').trim(); if (!raw) return 'Date TBA';
+    const raw = String(value || '').trim();
+    if (!raw) return 'Date TBA';
     const d = new Date(raw + 'T12:00:00');
-    return Number.isNaN(d.getTime()) ? raw : d.toLocaleDateString(undefined, { weekday:'short', month:'short', day:'numeric' });
+    return Number.isNaN(d.getTime())
+      ? raw
+      : d.toLocaleDateString(undefined, { weekday:'short', month:'short', day:'numeric', year:'numeric' });
   };
-  const eventMeta = ev => [eventDateLabel(ev.event_date), String(ev.event_time || '').trim(), String(ev.location || '').trim()].filter(Boolean).join(' • ');
-  const safePublicUrl = value => { const u=String(value||'').trim(); return /^https?:\/\//i.test(u) ? u : ''; };
+
+  const eventDateRangeLabel = ev => {
+    const start = String(ev.event_date || '').trim();
+    const end = String(ev.end_date || '').trim();
+    if (!start) return 'Date TBA';
+    if (end && end !== start) return `${eventDateLabel(start)} – ${eventDateLabel(end)}`;
+    return eventDateLabel(start);
+  };
+
+  const eventTimeRangeLabel = ev => {
+    const start = String(ev.event_time || '').trim();
+    const end = String(ev.end_time || '').trim();
+    if (start && end && !/[-–—]/.test(start)) return `${start} – ${end}`;
+    return start || (end ? `Until ${end}` : '');
+  };
+
+  const eventMeta = ev => [
+    eventDateRangeLabel(ev),
+    eventTimeRangeLabel(ev),
+    String(ev.location || '').trim()
+  ].filter(Boolean).join(' • ');
+
+  const safePublicUrl = value => {
+    const u = String(value || '').trim();
+    return /^https?:\/\//i.test(u) ? u : '';
+  };
+
+  const internalEventUrl = ev => `event.html?id=${encodeURIComponent(String(ev.id || ''))}`;
+
   const renderHomeEvents = events => {
-    const host=document.querySelector('[data-events-home]'); if(!host) return; host.innerHTML='';
-    const rows=events.slice(0,3); if(!rows.length){ const p=document.createElement('p'); p.className='events-empty-public'; p.textContent='No published events yet.'; host.appendChild(p); return; }
-    rows.forEach(ev=>{ const item=document.createElement('div'); item.className='home-event-item'; const title=document.createElement('strong'); title.textContent=ev.title||'Untitled event'; const meta=document.createElement('div'); meta.className='event-meta'; meta.textContent=eventMeta(ev); item.append(title,meta); host.appendChild(item); });
+    const host = document.querySelector('[data-events-home]');
+    if (!host) return;
+    host.innerHTML = '';
+
+    const rows = events.slice(0, 3);
+    if (!rows.length) {
+      const p = document.createElement('p');
+      p.className = 'events-empty-public';
+      p.textContent = 'No published events yet.';
+      host.appendChild(p);
+      return;
+    }
+
+    rows.forEach(ev => {
+      const item = document.createElement('div');
+      item.className = 'home-event-item';
+
+      const title = document.createElement('strong');
+      const titleLink = document.createElement('a');
+      titleLink.href = internalEventUrl(ev);
+      titleLink.textContent = ev.title || 'Untitled event';
+      title.appendChild(titleLink);
+
+      const meta = document.createElement('div');
+      meta.className = 'event-meta';
+      meta.textContent = eventMeta(ev);
+
+      item.append(title, meta);
+      host.appendChild(item);
+    });
   };
+
   const renderCommunityEvents = events => {
-    const host=document.querySelector('[data-events-list]'); if(!host) return; host.innerHTML='';
-    if(!events.length){ const p=document.createElement('p'); p.className='events-empty-public'; p.textContent='No published events yet.'; host.appendChild(p); return; }
-    events.slice(0,24).forEach(ev=>{ const card=document.createElement('article'); card.className='community-event-card'; const meta=document.createElement('div'); meta.className='event-meta'; meta.textContent=eventMeta(ev); const h=document.createElement('h3'); h.textContent=ev.title||'Untitled event'; card.append(meta,h); if(ev.description){ const p=document.createElement('p'); p.textContent=ev.description; card.appendChild(p); } const u=safePublicUrl(ev.source_url); if(u){ const a=document.createElement('a'); a.href=u; a.target='_blank'; a.rel='noopener noreferrer'; a.textContent='Event details →'; card.appendChild(a); } host.appendChild(card); });
+    const host = document.querySelector('[data-events-list]');
+    if (!host) return;
+    host.innerHTML = '';
+
+    if (!events.length) {
+      const p = document.createElement('p');
+      p.className = 'events-empty-public';
+      p.textContent = 'No published events yet.';
+      host.appendChild(p);
+      return;
+    }
+
+    events.slice(0, 24).forEach(ev => {
+      const card = document.createElement('article');
+      card.className = 'community-event-card';
+
+      const meta = document.createElement('div');
+      meta.className = 'event-meta';
+      meta.textContent = eventMeta(ev);
+
+      const h = document.createElement('h3');
+      const titleLink = document.createElement('a');
+      titleLink.href = internalEventUrl(ev);
+      titleLink.textContent = ev.title || 'Untitled event';
+      h.appendChild(titleLink);
+
+      card.append(meta, h);
+
+      if (ev.description) {
+        const p = document.createElement('p');
+        p.textContent = ev.description;
+        card.appendChild(p);
+      }
+
+      const detailLink = document.createElement('a');
+      detailLink.className = 'event-internal-link';
+      detailLink.href = internalEventUrl(ev);
+      detailLink.textContent = 'View event →';
+      card.appendChild(detailLink);
+
+      host.appendChild(card);
+    });
   };
+
+  const renderEventDetail = ev => {
+    const host = document.querySelector('[data-event-detail]');
+    if (!host) return;
+    host.innerHTML = '';
+
+    if (!ev) {
+      const empty = document.createElement('div');
+      empty.className = 'event-detail-empty';
+      const h = document.createElement('h1');
+      h.textContent = 'Event not found';
+      const p = document.createElement('p');
+      p.textContent = 'This event may have expired or is no longer published.';
+      const back = document.createElement('a');
+      back.className = 'btn solid';
+      back.href = 'community.html#upcoming-events';
+      back.textContent = 'Back to upcoming events';
+      empty.append(h, p, back);
+      host.appendChild(empty);
+      return;
+    }
+
+    document.title = `${ev.title || 'Event'} | The Hoot & Holler Press`;
+
+    const article = document.createElement('article');
+    article.className = 'event-detail-card';
+
+    const back = document.createElement('a');
+    back.className = 'event-detail-back';
+    back.href = 'community.html#upcoming-events';
+    back.textContent = '← Back to upcoming events';
+
+    const meta = document.createElement('div');
+    meta.className = 'event-meta event-detail-meta';
+    meta.textContent = eventMeta(ev);
+
+    const h = document.createElement('h1');
+    h.textContent = ev.title || 'Untitled event';
+
+    const body = document.createElement('div');
+    body.className = 'event-detail-body';
+
+    const imageUrl = safePublicUrl(ev.image_url);
+    if (Number(ev.show_image || 0) === 1 && imageUrl) {
+      const media = document.createElement('figure');
+      media.className = 'event-detail-media';
+      const img = document.createElement('img');
+      img.src = imageUrl;
+      img.alt = ev.title ? `${ev.title} event image` : 'Event image';
+      img.loading = 'eager';
+      img.addEventListener('error', () => media.remove());
+      media.appendChild(img);
+      body.appendChild(media);
+    }
+
+    const copy = document.createElement('div');
+    copy.className = 'event-detail-copy';
+
+    if (ev.description) {
+      String(ev.description).split(/\n{2,}/).filter(Boolean).forEach(part => {
+        const p = document.createElement('p');
+        p.textContent = part.trim();
+        copy.appendChild(p);
+      });
+    } else {
+      const p = document.createElement('p');
+      p.textContent = 'No additional description was provided.';
+      copy.appendChild(p);
+    }
+
+    const sourceUrl = safePublicUrl(ev.source_url);
+    if (sourceUrl) {
+      const sourceWrap = document.createElement('div');
+      sourceWrap.className = 'event-source-cta';
+
+      const sourceLabel = document.createElement('span');
+      sourceLabel.className = 'small-cap';
+      sourceLabel.textContent = ev.source_name || 'Original source';
+
+      const sourceLink = document.createElement('a');
+      sourceLink.className = 'btn solid';
+      sourceLink.href = sourceUrl;
+      sourceLink.target = '_blank';
+      sourceLink.rel = 'noopener noreferrer';
+      sourceLink.textContent = ev.source_name
+        ? `View on ${ev.source_name} →`
+        : 'View original event listing →';
+
+      sourceWrap.append(sourceLabel, sourceLink);
+      copy.appendChild(sourceWrap);
+    }
+
+    body.appendChild(copy);
+    article.append(back, meta, h, body);
+    host.appendChild(article);
+  };
+
   const loadPublishedEvents = async () => {
     if (!document.querySelector('[data-events-home],[data-events-list]')) return;
-    try { const r=await fetch(EVENTS_API_URL,{headers:{Accept:'application/json'},cache:'no-store'}); if(!r.ok) throw new Error(`Events API returned ${r.status}`); const data=await r.json(); const rows=Array.isArray(data)?data:[]; renderHomeEvents(rows); renderCommunityEvents(rows); }
-    catch(err){ console.warn('Events feed unavailable.',err); renderHomeEvents([]); renderCommunityEvents([]); }
+    try {
+      const r = await fetch(EVENTS_API_URL, { headers:{ Accept:'application/json' }, cache:'no-store' });
+      if (!r.ok) throw new Error(`Events API returned ${r.status}`);
+      const data = await r.json();
+      const rows = Array.isArray(data) ? data : [];
+      renderHomeEvents(rows);
+      renderCommunityEvents(rows);
+    } catch (err) {
+      console.warn('Events feed unavailable.', err);
+      renderHomeEvents([]);
+      renderCommunityEvents([]);
+    }
+  };
+
+  const loadEventDetail = async () => {
+    const host = document.querySelector('[data-event-detail]');
+    if (!host) return;
+
+    const id = new URLSearchParams(window.location.search).get('id');
+    if (!id || !/^\d+$/.test(id)) {
+      renderEventDetail(null);
+      return;
+    }
+
+    try {
+      const r = await fetch(`${EVENTS_API_URL}/${encodeURIComponent(id)}`, {
+        headers:{ Accept:'application/json' },
+        cache:'no-store'
+      });
+      if (!r.ok) {
+        renderEventDetail(null);
+        return;
+      }
+      renderEventDetail(await r.json());
+    } catch (err) {
+      console.warn('Event detail unavailable.', err);
+      renderEventDetail(null);
+    }
   };
 
 
@@ -355,6 +586,7 @@
   });
 
   loadPublishedEvents();
+  loadEventDetail();
 
   loadAdvertisements();
 })();
