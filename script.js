@@ -479,6 +479,62 @@
   };
 
 
+
+  // Published weekly Hoot + Trivia loader.
+  const WEEKLY_CONTENT_API_URL = 'https://worker-d1-public.thehootandhollerpress.workers.dev/weekly-content';
+
+  const renderWeeklyContent = payload => {
+    const hoot = payload && payload.hoot;
+    const trivia = payload && payload.trivia;
+
+    const hootSection = document.querySelector('[data-weekly-hoot]');
+    if (hootSection && hoot) {
+      const title = hootSection.querySelector('h3');
+      const punchline = hootSection.querySelector('.hoot-copy');
+      if (title) title.textContent = hoot.setup || '';
+      if (punchline) punchline.textContent = hoot.punchline || '';
+    }
+
+    const triviaSection = document.querySelector('[data-weekly-trivia]');
+    if (triviaSection && trivia) {
+      const list = triviaSection.querySelector('ol');
+      const answers = triviaSection.querySelector('.answers');
+
+      if (list) {
+        list.innerHTML = '';
+        [trivia.question_1, trivia.question_2, trivia.question_3].forEach(question => {
+          const li = document.createElement('li');
+          li.textContent = question || '';
+          list.appendChild(li);
+        });
+      }
+
+      if (answers) {
+        answers.innerHTML = '';
+        [trivia.answer_1, trivia.answer_2, trivia.answer_3].forEach((answer, index) => {
+          const p = document.createElement('p');
+          p.textContent = `${index + 1}. ${answer || ''}`;
+          answers.appendChild(p);
+        });
+      }
+    }
+  };
+
+  const loadWeeklyContent = async () => {
+    if (!document.querySelector('[data-weekly-hoot],[data-weekly-trivia]')) return;
+    try {
+      const r = await fetch(WEEKLY_CONTENT_API_URL, {
+        headers:{Accept:'application/json'},
+        cache:'no-store'
+      });
+      if (!r.ok) throw new Error(`Weekly content API returned ${r.status}`);
+      renderWeeklyContent(await r.json());
+    } catch (err) {
+      // Keep the hard-coded homepage fallback if the weekly API is unavailable.
+      console.warn('Weekly content feed unavailable; keeping homepage fallback.', err);
+    }
+  };
+
   // Animated footer owl.
   document.querySelectorAll('.footer-owl-stage').forEach(owl => {
     const badge = owl.querySelector('.footer-owl-badge');
@@ -586,6 +642,7 @@
   });
 
   loadPublishedEvents();
+  loadWeeklyContent();
   loadEventDetail();
 
   loadAdvertisements();

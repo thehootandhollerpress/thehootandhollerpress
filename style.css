@@ -1192,3 +1192,5 @@ p{color:#4f4334}
     font-size:clamp(2.5rem,12vw,4rem);
   }
 }
+
+.hoot-reveal-row{display:block}.hoot-submit-row{display:block;margin-top:1.25rem}.hoot-submit{display:inline-block;width:auto;margin:0;font-size:.7rem;text-transform:uppercase;font-weight:900;letter-spacing:.08em;border-bottom:1px solid currentColor}
