@@ -483,55 +483,69 @@
   // Published weekly Hoot + Trivia loader.
   const WEEKLY_CONTENT_API_URL = 'https://worker-d1-public.thehootandhollerpress.workers.dev/weekly-content';
 
+  const setWeeklyRevealState = (section, enabled) => {
+    if (!section) return;
+    const button = section.querySelector('.reveal-answer');
+    const answers = section.querySelector('.answers');
+    if (button) {
+      button.disabled = !enabled;
+      button.setAttribute('aria-expanded', 'false');
+      button.textContent = button.dataset.revealShow || button.textContent;
+    }
+    if (answers) answers.setAttribute('hidden', '');
+  };
+
   const renderWeeklyContent = payload => {
     const hoot = payload && payload.hoot;
     const trivia = payload && payload.trivia;
 
     const hootSection = document.querySelector('[data-weekly-hoot]');
-    if (hootSection && hoot) {
-      const title = hootSection.querySelector('h3');
-      const punchline = hootSection.querySelector('.hoot-copy');
-      if (title) title.textContent = hoot.setup || '';
-      if (punchline) punchline.textContent = hoot.punchline || '';
+    if (hootSection) {
+      const setup = hootSection.querySelector('[data-weekly-hoot-setup]');
+      const punchline = hootSection.querySelector('[data-weekly-hoot-punchline]');
+
+      if (hoot) {
+        if (setup) setup.textContent = hoot.setup || '';
+        if (punchline) punchline.textContent = hoot.punchline || '';
+        setWeeklyRevealState(hootSection, true);
+      } else {
+        if (setup) setup.textContent = 'Hoot of the Week will appear here once published.';
+        if (punchline) punchline.textContent = '';
+        setWeeklyRevealState(hootSection, false);
+      }
     }
 
     const triviaSection = document.querySelector('[data-weekly-trivia]');
-    if (triviaSection && trivia) {
-      const list = triviaSection.querySelector('ol');
-      const answers = triviaSection.querySelector('.answers');
+    if (triviaSection) {
+      const question = triviaSection.querySelector('[data-weekly-trivia-question]');
+      const answer = triviaSection.querySelector('[data-weekly-trivia-answer]');
 
-      if (list) {
-        list.innerHTML = '';
-        [trivia.question_1, trivia.question_2, trivia.question_3].forEach(question => {
-          const li = document.createElement('li');
-          li.textContent = question || '';
-          list.appendChild(li);
-        });
-      }
-
-      if (answers) {
-        answers.innerHTML = '';
-        [trivia.answer_1, trivia.answer_2, trivia.answer_3].forEach((answer, index) => {
-          const p = document.createElement('p');
-          p.textContent = `${index + 1}. ${answer || ''}`;
-          answers.appendChild(p);
-        });
+      if (trivia) {
+        if (question) question.textContent = trivia.question || '';
+        if (answer) answer.textContent = trivia.answer || '';
+        setWeeklyRevealState(triviaSection, true);
+      } else {
+        if (question) question.textContent = 'Trivia will appear here once published.';
+        if (answer) answer.textContent = '';
+        setWeeklyRevealState(triviaSection, false);
       }
     }
   };
 
   const loadWeeklyContent = async () => {
     if (!document.querySelector('[data-weekly-hoot],[data-weekly-trivia]')) return;
+
     try {
       const r = await fetch(WEEKLY_CONTENT_API_URL, {
         headers:{Accept:'application/json'},
         cache:'no-store'
       });
+
       if (!r.ok) throw new Error(`Weekly content API returned ${r.status}`);
       renderWeeklyContent(await r.json());
     } catch (err) {
-      // Keep the hard-coded homepage fallback if the weekly API is unavailable.
-      console.warn('Weekly content feed unavailable; keeping homepage fallback.', err);
+      console.warn('Weekly content feed unavailable.', err);
+      renderWeeklyContent({hoot:null,trivia:null});
     }
   };
 
