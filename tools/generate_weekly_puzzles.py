@@ -19,6 +19,7 @@ from pathlib import Path
 
 GRID_SIZE = 15
 WORD_COUNT = 14
+WORD_COOLDOWN_WEEKS = 8
 SUDOKU_CLUES = 36
 DIRECTIONS = ((0, 1), (1, 0), (1, 1), (1, -1), (0, -1), (-1, 0), (-1, -1), (-1, 1))
 
@@ -117,7 +118,7 @@ def load_words(path: Path) -> list[str]:
     for item in data:
         raw = item.get("answer", "") if isinstance(item, dict) else str(item)
         word = re.sub(r"[^A-Za-z]", "", raw).upper()
-        if 4 <= len(word) <= GRID_SIZE and word not in seen:
+        if 3 <= len(word) <= GRID_SIZE and word not in seen:
             seen.add(word)
             words.append(word)
     if len(words) < WORD_COUNT:
@@ -164,9 +165,17 @@ def place_word(grid: list[list[str]], word: str, rng: random.Random) -> dict[str
     }
 
 
-def make_wordsearch(rng: random.Random, bank: list[str], old_hashes: set[str]) -> dict[str, object]:
+def make_wordsearch(
+    rng: random.Random,
+    bank: list[str],
+    old_hashes: set[str],
+    blocked_words: set[str],
+) -> dict[str, object]:
+    available_words = [word for word in bank if word not in blocked_words]
+    if len(available_words) < WORD_COUNT:
+        available_words = bank
     for attempt in range(250):
-        selected = rng.sample(bank, WORD_COUNT)
+        selected = rng.sample(available_words, WORD_COUNT)
         selected.sort(key=lambda word: (-len(word), word))
         grid = [["" for _ in range(GRID_SIZE)] for _ in range(GRID_SIZE)]
         placements = []
@@ -279,12 +288,34 @@ def main() -> None:
     history.setdefault("sudoku_hashes", [])
     history.setdefault("wordsearch_hashes", [])
 
+    current_path = puzzles / "current.json"
+    if current_path.exists():
+        current_payload = json.loads(current_path.read_text(encoding="utf-8"))
+        current_issue = current_payload.get("issue", {}).get("iso_week")
+        current_words = current_payload.get("wordsearch", {}).get("words", [])
+        if current_issue in history["weeks"] and current_words:
+            history["weeks"][current_issue].setdefault("wordsearch_words", current_words)
+
     existing_week = history["weeks"].get(iso_week, {})
     blocked_wordsearch_hashes = set(history["wordsearch_hashes"])
     blocked_wordsearch_hashes.discard(existing_week.get("wordsearch_hash"))
+    previous_weeks = sorted(
+        (week_key for week_key in history["weeks"] if week_key < iso_week),
+        reverse=True,
+    )[:WORD_COOLDOWN_WEEKS]
+    blocked_words = {
+        str(word)
+        for week_key in previous_weeks
+        for word in history["weeks"][week_key].get("wordsearch_words", [])
+    }
 
     sudoku = make_sudoku(rng)
-    wordsearch = make_wordsearch(rng, load_words(puzzles / "wordsearch_bank.json"), blocked_wordsearch_hashes)
+    wordsearch = make_wordsearch(
+        rng,
+        load_words(puzzles / "wordsearch_bank.json"),
+        blocked_wordsearch_hashes,
+        blocked_words,
+    )
     sudoku_hash = canonical_hash(sudoku["puzzle"])
     wordsearch_hash = canonical_hash(wordsearch)
 
@@ -324,6 +355,7 @@ def main() -> None:
         "archive": f"archive/{iso_week}.json",
         "sudoku_hash": sudoku_hash,
         "wordsearch_hash": wordsearch_hash,
+        "wordsearch_words": wordsearch["words"],
     }
     write_json(history_path, history)
     print(f"Generated {iso_week}: Sudoku + {len(wordsearch['words'])}-word search")

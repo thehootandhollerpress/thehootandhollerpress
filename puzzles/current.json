@@ -1,0 +1,409 @@
+{
+  "schema_version": 2,
+  "issue": {
+    "iso_week": "2026-W36",
+    "week_start": "2026-08-31",
+    "week_end": "2026-09-06",
+    "seed": "HHP-2026-W36-WORDSEARCH"
+  },
+  "generator_seed": "HHP-2026-W36-WORDSEARCH",
+  "sudoku": {
+    "difficulty": "medium",
+    "clues": 36,
+    "puzzle": [
+      [
+        4,
+        0,
+        2,
+        0,
+        7,
+        8,
+        1,
+        0,
+        3
+      ],
+      [
+        3,
+        9,
+        0,
+        4,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        7,
+        0,
+        1,
+        9,
+        0,
+        0,
+        0
+      ],
+      [
+        7,
+        0,
+        8,
+        0,
+        0,
+        0,
+        0,
+        5,
+        0
+      ],
+      [
+        0,
+        0,
+        6,
+        7,
+        8,
+        3,
+        0,
+        4,
+        1
+      ],
+      [
+        0,
+        4,
+        0,
+        0,
+        0,
+        5,
+        0,
+        0,
+        7
+      ],
+      [
+        0,
+        0,
+        4,
+        6,
+        0,
+        7,
+        0,
+        1,
+        0
+      ],
+      [
+        6,
+        0,
+        5,
+        0,
+        3,
+        1,
+        0,
+        2,
+        9
+      ],
+      [
+        0,
+        0,
+        3,
+        0,
+        0,
+        2,
+        0,
+        0,
+        0
+      ]
+    ],
+    "solution": [
+      [
+        4,
+        6,
+        2,
+        5,
+        7,
+        8,
+        1,
+        9,
+        3
+      ],
+      [
+        3,
+        9,
+        1,
+        4,
+        2,
+        6,
+        7,
+        8,
+        5
+      ],
+      [
+        5,
+        8,
+        7,
+        3,
+        1,
+        9,
+        2,
+        6,
+        4
+      ],
+      [
+        7,
+        3,
+        8,
+        1,
+        9,
+        4,
+        6,
+        5,
+        2
+      ],
+      [
+        2,
+        5,
+        6,
+        7,
+        8,
+        3,
+        9,
+        4,
+        1
+      ],
+      [
+        1,
+        4,
+        9,
+        2,
+        6,
+        5,
+        8,
+        3,
+        7
+      ],
+      [
+        9,
+        2,
+        4,
+        6,
+        5,
+        7,
+        3,
+        1,
+        8
+      ],
+      [
+        6,
+        7,
+        5,
+        8,
+        3,
+        1,
+        4,
+        2,
+        9
+      ],
+      [
+        8,
+        1,
+        3,
+        9,
+        4,
+        2,
+        5,
+        7,
+        6
+      ]
+    ]
+  },
+  "wordsearch": {
+    "rows": 15,
+    "cols": 15,
+    "grid": [
+      "DPDQIJYGOYDWBHB",
+      "OYXOVAAKNIHTSJB",
+      "YRREFDSUDACZEEM",
+      "IYTICVYKQVPGYSQ",
+      "XZDGMIUOWHJDRUM",
+      "NXHCGPZDBTCUOOV",
+      "ATRIVIAUNALATHD",
+      "EFMOUJDSLTEYSTH",
+      "YJQRBALEXTNZDHS",
+      "MHTRUHNTXCNAEGI",
+      "CAAQLDGMYXAAPIG",
+      "KIZEAOBISDHCPLN",
+      "NXIREVIREJCIUOW",
+      "FXOQDAXNYNFRBHN",
+      "WWKQMICHIGANQYC"
+    ],
+    "words": [
+      "BRAIN",
+      "CALENDAR",
+      "CHANNEL",
+      "CITY",
+      "FERRY",
+      "LIGHTHOUSE",
+      "MICHIGAN",
+      "NEIGHBOR",
+      "RIVER",
+      "SIGN",
+      "STORY",
+      "SUDOKU",
+      "THINK",
+      "TRIVIA"
+    ],
+    "placements": [
+      {
+        "word": "BRAIN",
+        "start_row": 8,
+        "start_col": 4,
+        "end_row": 12,
+        "end_col": 0,
+        "direction": [
+          1,
+          -1
+        ]
+      },
+      {
+        "word": "CALENDAR",
+        "start_row": 5,
+        "start_col": 10,
+        "end_row": 12,
+        "end_col": 3,
+        "direction": [
+          1,
+          -1
+        ]
+      },
+      {
+        "word": "CHANNEL",
+        "start_row": 12,
+        "start_col": 10,
+        "end_row": 6,
+        "end_col": 10,
+        "direction": [
+          -1,
+          0
+        ]
+      },
+      {
+        "word": "CITY",
+        "start_row": 3,
+        "start_col": 4,
+        "end_row": 3,
+        "end_col": 1,
+        "direction": [
+          0,
+          -1
+        ]
+      },
+      {
+        "word": "FERRY",
+        "start_row": 2,
+        "start_col": 4,
+        "end_row": 2,
+        "end_col": 0,
+        "direction": [
+          0,
+          -1
+        ]
+      },
+      {
+        "word": "LIGHTHOUSE",
+        "start_row": 11,
+        "start_col": 13,
+        "end_row": 2,
+        "end_col": 13,
+        "direction": [
+          -1,
+          0
+        ]
+      },
+      {
+        "word": "MICHIGAN",
+        "start_row": 14,
+        "start_col": 4,
+        "end_row": 14,
+        "end_col": 11,
+        "direction": [
+          0,
+          1
+        ]
+      },
+      {
+        "word": "NEIGHBOR",
+        "start_row": 13,
+        "start_col": 9,
+        "end_row": 6,
+        "end_col": 2,
+        "direction": [
+          -1,
+          -1
+        ]
+      },
+      {
+        "word": "RIVER",
+        "start_row": 12,
+        "start_col": 7,
+        "end_row": 12,
+        "end_col": 3,
+        "direction": [
+          0,
+          -1
+        ]
+      },
+      {
+        "word": "SIGN",
+        "start_row": 8,
+        "start_col": 14,
+        "end_row": 11,
+        "end_col": 14,
+        "direction": [
+          1,
+          0
+        ]
+      },
+      {
+        "word": "STORY",
+        "start_row": 7,
+        "start_col": 12,
+        "end_row": 3,
+        "end_col": 12,
+        "direction": [
+          -1,
+          0
+        ]
+      },
+      {
+        "word": "SUDOKU",
+        "start_row": 7,
+        "start_col": 7,
+        "end_row": 2,
+        "end_col": 7,
+        "direction": [
+          -1,
+          0
+        ]
+      },
+      {
+        "word": "THINK",
+        "start_row": 1,
+        "start_col": 11,
+        "end_row": 1,
+        "end_col": 7,
+        "direction": [
+          0,
+          -1
+        ]
+      },
+      {
+        "word": "TRIVIA",
+        "start_row": 6,
+        "start_col": 1,
+        "end_row": 6,
+        "end_col": 6,
+        "direction": [
+          0,
+          1
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "weeks": {
+    "2026-W36": {
+      "week_start": "2026-08-31",
+      "archive": "archive/2026-W36.json",
+      "sudoku_hash": "4177d9e497f35a0cf530ad7ebd0e485d725d21ff253e163e83586dd42e4d5ac6",
+      "wordsearch_hash": "403405c0a13fd0ec847f57e1a1c267696a8bea4f5fc6a12f782c6379a0396ae0"
+    }
+  },
+  "sudoku_hashes": [
+    "98e179911ab28ea6abed5d201eeadd7c9d23c45dfa80b07c8a222eb5f750e3c9",
+    "4177d9e497f35a0cf530ad7ebd0e485d725d21ff253e163e83586dd42e4d5ac6"
+  ],
+  "wordsearch_hashes": [
+    "403405c0a13fd0ec847f57e1a1c267696a8bea4f5fc6a12f782c6379a0396ae0"
+  ]
+}
