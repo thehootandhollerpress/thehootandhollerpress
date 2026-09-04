@@ -4,14 +4,54 @@
       "week_start": "2026-08-31",
       "archive": "archive/2026-W36.json",
       "sudoku_hash": "4177d9e497f35a0cf530ad7ebd0e485d725d21ff253e163e83586dd42e4d5ac6",
-      "wordsearch_hash": "403405c0a13fd0ec847f57e1a1c267696a8bea4f5fc6a12f782c6379a0396ae0"
+      "wordsearch_hash": "403405c0a13fd0ec847f57e1a1c267696a8bea4f5fc6a12f782c6379a0396ae0",
+      "wordsearch_words": [
+        "BRAIN",
+        "CALENDAR",
+        "CHANNEL",
+        "CITY",
+        "FERRY",
+        "LIGHTHOUSE",
+        "MICHIGAN",
+        "NEIGHBOR",
+        "RIVER",
+        "SIGN",
+        "STORY",
+        "SUDOKU",
+        "THINK",
+        "TRIVIA"
+      ]
+    },
+    "2026-W37": {
+      "week_start": "2026-09-07",
+      "archive": "archive/2026-W37.json",
+      "sudoku_hash": "07a5f997103b6337274cb53ab38c99703da10c3c9eb7a7969cdc847404784fa5",
+      "wordsearch_hash": "979d1743712c72953d63a080af35a9e49abe3ca969766f793bb6abef553c8f73",
+      "wordsearch_words": [
+        "BREAKWATER",
+        "BROADCAST",
+        "CEDAR",
+        "FACT",
+        "FIND",
+        "FLIGHT",
+        "GOLF",
+        "MINK",
+        "OVAL",
+        "PLAY",
+        "RASPBERRY",
+        "REEF",
+        "ROSE",
+        "SOLSTICE"
+      ]
     }
   },
   "sudoku_hashes": [
     "98e179911ab28ea6abed5d201eeadd7c9d23c45dfa80b07c8a222eb5f750e3c9",
-    "4177d9e497f35a0cf530ad7ebd0e485d725d21ff253e163e83586dd42e4d5ac6"
+    "4177d9e497f35a0cf530ad7ebd0e485d725d21ff253e163e83586dd42e4d5ac6",
+    "07a5f997103b6337274cb53ab38c99703da10c3c9eb7a7969cdc847404784fa5"
   ],
   "wordsearch_hashes": [
-    "403405c0a13fd0ec847f57e1a1c267696a8bea4f5fc6a12f782c6379a0396ae0"
+    "403405c0a13fd0ec847f57e1a1c267696a8bea4f5fc6a12f782c6379a0396ae0",
+    "979d1743712c72953d63a080af35a9e49abe3ca969766f793bb6abef553c8f73"
   ]
 }
