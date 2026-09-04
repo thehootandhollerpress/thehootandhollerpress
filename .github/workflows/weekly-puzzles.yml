@@ -1,0 +1,59 @@
+name: Generate weekly puzzles
+
+on:
+  schedule:
+    # Every Friday at 11:04 AM in Michigan, including daylight-saving changes.
+    - cron: "4 11 * * 5"
+      timezone: "America/Detroit"
+  workflow_dispatch:
+    inputs:
+      week:
+        description: "Optional ISO week, for example 2026-W36"
+        required: false
+        type: string
+
+permissions:
+  contents: write
+
+concurrency:
+  group: weekly-puzzles
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Generate Sudoku and word search
+        shell: bash
+        env:
+          REQUESTED_WEEK: ${{ inputs.week }}
+        run: |
+          if [ -n "$REQUESTED_WEEK" ]; then
+            python tools/generate_weekly_puzzles.py --week "$REQUESTED_WEEK"
+          elif [ "$GITHUB_EVENT_NAME" = "schedule" ]; then
+            UPCOMING_WEEK="$(TZ=America/Detroit date -d '+3 days' +%G-W%V)"
+            python tools/generate_weekly_puzzles.py --week "$UPCOMING_WEEK"
+          else
+            python tools/generate_weekly_puzzles.py
+          fi
+
+      - name: Commit updated puzzle files
+        shell: bash
+        run: |
+          if git diff --quiet -- puzzles; then
+            echo "Puzzle files are already current."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add puzzles
+          git commit -m "Update weekly Sudoku and word search"
+          git push

@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="The Hoot & Holler Press — Blue Water Edition. Community humor, weekly issues, local happenings and advertising for the Blue Water Area."><meta name="theme-color" content="#19150f"><title>The Hoot & Holler Press | Blue Water Edition</title><link rel="stylesheet" href="style.css?v=20260822-weekly-content"><link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="shortcut icon" href="/favicon.ico"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://thehootandhollerpress.com/"></head><body class="home"><a class="skip-link" href="#main">Skip to content</a>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="The Hoot & Holler Press — Blue Water Edition. Community humor, weekly issues, local happenings and advertising for the Blue Water Area."><meta name="theme-color" content="#19150f"><title>The Hoot & Holler Press | Blue Water Edition</title><link rel="stylesheet" href="style.css?v=20260901-wordsearch"><link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="shortcut icon" href="/favicon.ico"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://thehootandhollerpress.com/"></head><body class="home"><a class="skip-link" href="#main">Skip to content</a>
 <div class="utility-bar"><div class="shell utility-inner"><span>BLUE WATER EDITION</span><span>PORT HURON • ST. CLAIR COUNTY • COMMUNITY WEEKLY</span></div></div>
 <header class="site-header">
   <div class="shell masthead-shell"><a href="/" class="masthead-link"><img src="images/hoot-holler-masthead.webp" alt="The Hoot &amp; Holler Press — Blue Water Edition"></a></div>
@@ -29,7 +29,7 @@
     <em>Community humor weekly newspaper</em>
   </div>
   <div class="issue-band-copy"><span class="section-kicker">This week's issue</span><h2>A fresh weekly read for the Blue Water Area.</h2><p>Open the newest edition, catch up on community happenings, send in a laugh, and discover the local businesses helping keep the paper in circulation.</p><a class="btn outline-light" href="issue.html">Go to the current issue →</a></div>
-  <aside class="issue-note"><strong>In every edition</strong><ul><li>Community notes &amp; happenings</li><li>Humor, trivia &amp; oddities</li><li>Local business advertising</li><li>Reader submissions</li></ul></aside>
+  <aside class="issue-note"><strong>In every edition</strong><ul><li>Community notes &amp; happenings</li><li>Humor, trivia &amp; weekly puzzles</li><li>Local business advertising</li><li>Reader submissions</li></ul></aside>
 </div></section>
 
 <section class="shell content-rail section">
@@ -59,6 +59,39 @@
 <div class="hoot-submit-row"><a class="hoot-submit" href="contact.html">Send us your hoot →</a></div>
 </section>
     </div>
+
+<section class="weekly-puzzles" data-weekly-puzzles>
+      <div class="weekly-puzzles-heading">
+        <div><span class="small-cap">Weekly puzzle desk</span><h3>Sudoku &amp; word search</h3></div>
+        <p>Two fresh puzzles every week—solve them here and look for the same pair in the current print edition.</p>
+        <span class="puzzle-issue-label" data-puzzle-issue>Loading this week's puzzles…</span>
+      </div>
+
+      <div class="weekly-puzzles-grid">
+        <article class="puzzle-card sudoku-card">
+          <div class="puzzle-card-head"><div><span class="small-cap">Number puzzle</span><h4>Sudoku</h4></div><span class="puzzle-difficulty" data-sudoku-difficulty></span></div>
+          <div class="sudoku-board" data-sudoku-grid aria-label="Weekly Sudoku puzzle"></div>
+          <div class="puzzle-actions">
+            <button type="button" class="puzzle-button" data-puzzle-action="check-sudoku">Check puzzle</button>
+            <button type="button" class="puzzle-button" data-puzzle-action="reveal-sudoku">Show solution</button>
+          </div>
+          <p class="puzzle-status" data-sudoku-status aria-live="polite"></p>
+        </article>
+
+        <article class="puzzle-card wordsearch-card">
+          <div class="puzzle-card-head"><div><span class="small-cap">Word puzzle</span><h4>Word Search</h4></div><span class="puzzle-difficulty" data-wordsearch-count></span></div>
+          <p class="wordsearch-instructions">Click the first and last letter of each hidden word. Words may run across, down, diagonally, forward, or backward.</p>
+          <div class="wordsearch-board" data-wordsearch-grid role="grid" aria-label="Weekly word search puzzle"></div>
+          <div class="wordsearch-bank" data-wordsearch-words aria-label="Words to find"></div>
+          <div class="puzzle-actions">
+            <button type="button" class="puzzle-button" data-puzzle-action="clear-wordsearch">Clear selection</button>
+            <button type="button" class="puzzle-button" data-puzzle-action="reveal-wordsearch">Show solution</button>
+          </div>
+          <p class="puzzle-status" data-wordsearch-status aria-live="polite"></p>
+        </article>
+      </div>
+      <p class="puzzle-feed-error" data-puzzle-error hidden>Weekly puzzles are temporarily unavailable. Please check back shortly.</p>
+    </section>
   </div>
   <aside class="right-rail">
     <div class="rail-heading"><span class="rail-kicker">Local advertising</span><h3>Available display positions</h3></div>
@@ -122,4 +155,4 @@
       <span>thehootandhollerpress.com</span>
     </div>
   </div>
-</footer><script src="script.js"></script></body></html>
+</footer><script src="script.js?v=20260901-wordsearch"></script></body></html>

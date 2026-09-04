@@ -549,6 +549,264 @@
     }
   };
 
+  // Automatic weekly Sudoku + word-search loader.
+  const WEEKLY_PUZZLES_URL = 'puzzles/current.json';
+
+  const puzzleDateLabel = isoDate => {
+    try {
+      const d = new Date(`${isoDate}T12:00:00`);
+      return new Intl.DateTimeFormat('en-US', {month:'long', day:'numeric', year:'numeric'}).format(d);
+    } catch (_) {
+      return isoDate || '';
+    }
+  };
+
+  const clearPuzzleCheckClasses = host => {
+    if (!host) return;
+    host.querySelectorAll('input').forEach(input => input.classList.remove('is-wrong','is-right'));
+  };
+
+  const renderSudoku = sudoku => {
+    const host = document.querySelector('[data-sudoku-grid]');
+    if (!host || !sudoku || !Array.isArray(sudoku.puzzle) || !Array.isArray(sudoku.solution)) return;
+    host.innerHTML = '';
+    sudoku.puzzle.forEach((row, r) => row.forEach((value, c) => {
+      const input = document.createElement('input');
+      input.className = 'sudoku-cell';
+      input.type = 'text';
+      input.inputMode = 'numeric';
+      input.autocomplete = 'off';
+      input.maxLength = 1;
+      input.setAttribute('aria-label', `Sudoku row ${r + 1}, column ${c + 1}`);
+      input.dataset.solution = String(sudoku.solution[r][c]);
+      if (c === 2 || c === 5) input.classList.add('sudoku-box-right');
+      if (r === 2 || r === 5) input.classList.add('sudoku-box-bottom');
+      if (value) {
+        input.value = String(value);
+        input.readOnly = true;
+        input.classList.add('is-given');
+      } else {
+        input.addEventListener('input', () => {
+          input.value = input.value.replace(/[^1-9]/g, '').slice(0, 1);
+          input.classList.remove('is-wrong','is-right');
+        });
+      }
+      host.appendChild(input);
+    }));
+    const difficulty = document.querySelector('[data-sudoku-difficulty]');
+    if (difficulty) difficulty.textContent = `${sudoku.difficulty || 'medium'} • ${sudoku.clues || ''} clues`;
+  };
+
+  let wordSearchState = null;
+
+  const wordSearchLine = (start, end) => {
+    const dr = Math.sign(end.row - start.row);
+    const dc = Math.sign(end.col - start.col);
+    const rowDistance = Math.abs(end.row - start.row);
+    const colDistance = Math.abs(end.col - start.col);
+    if (!(start.row === end.row || start.col === end.col || rowDistance === colDistance)) return [];
+    const length = Math.max(rowDistance, colDistance) + 1;
+    return Array.from({length}, (_, i) => ({row:start.row + dr * i, col:start.col + dc * i}));
+  };
+
+  const wordSearchKey = cells => cells.map(cell => `${cell.row}:${cell.col}`).join('|');
+
+  const setWordSearchStatus = message => {
+    const status = document.querySelector('[data-wordsearch-status]');
+    if (status) status.textContent = message;
+  };
+
+  const paintWordSearch = () => {
+    if (!wordSearchState) return;
+    const host = document.querySelector('[data-wordsearch-grid]');
+    if (!host) return;
+    host.querySelectorAll('.wordsearch-cell').forEach(cell => {
+      const key = `${cell.dataset.row}:${cell.dataset.col}`;
+      cell.classList.toggle('is-found', wordSearchState.foundCells.has(key));
+      cell.classList.toggle('is-selected', wordSearchState.start?.row === Number(cell.dataset.row) && wordSearchState.start?.col === Number(cell.dataset.col));
+      cell.classList.toggle('is-solution', wordSearchState.solutionCells.has(key));
+    });
+    document.querySelectorAll('[data-wordsearch-word]').forEach(word => {
+      word.classList.toggle('is-found', wordSearchState.foundWords.has(word.dataset.wordsearchWord));
+    });
+  };
+
+  const chooseWordSearchCell = (row, col) => {
+    if (!wordSearchState || wordSearchState.showingSolution) return;
+    if (!wordSearchState.start) {
+      wordSearchState.start = {row, col};
+      setWordSearchStatus('Now click the last letter of the word.');
+      paintWordSearch();
+      return;
+    }
+
+    const cells = wordSearchLine(wordSearchState.start, {row, col});
+    wordSearchState.start = null;
+    if (!cells.length) {
+      setWordSearchStatus('Selections must be horizontal, vertical, or diagonal.');
+      paintWordSearch();
+      return;
+    }
+
+    const forward = wordSearchKey(cells);
+    const backward = wordSearchKey([...cells].reverse());
+    const match = wordSearchState.placements.find(item => item.key === forward || item.key === backward);
+    if (!match) {
+      setWordSearchStatus('That line is not one of this week\'s hidden words.');
+      paintWordSearch();
+      return;
+    }
+
+    wordSearchState.foundWords.add(match.word);
+    match.cells.forEach(cell => wordSearchState.foundCells.add(`${cell.row}:${cell.col}`));
+    const total = wordSearchState.placements.length;
+    const found = wordSearchState.foundWords.size;
+    setWordSearchStatus(found === total ? 'You found every word!' : `Found ${match.word}. ${total - found} left.`);
+    paintWordSearch();
+  };
+
+  const renderWordSearch = wordsearch => {
+    const host = document.querySelector('[data-wordsearch-grid]');
+    const bank = document.querySelector('[data-wordsearch-words]');
+    if (!host || !bank || !wordsearch || !Array.isArray(wordsearch.grid) || !Array.isArray(wordsearch.placements)) return;
+    host.innerHTML = '';
+    bank.innerHTML = '';
+    host.style.gridTemplateColumns = `repeat(${wordsearch.cols}, 1fr)`;
+
+    const placements = wordsearch.placements.map(item => {
+      const cells = wordSearchLine({row:item.start_row, col:item.start_col}, {row:item.end_row, col:item.end_col});
+      return {word:item.word, cells, key:wordSearchKey(cells)};
+    });
+    wordSearchState = {
+      placements,
+      foundWords:new Set(),
+      foundCells:new Set(),
+      solutionCells:new Set(),
+      start:null,
+      showingSolution:false
+    };
+
+    wordsearch.grid.forEach((line, row) => Array.from(line).forEach((letter, col) => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'wordsearch-cell';
+      button.textContent = letter;
+      button.dataset.row = String(row);
+      button.dataset.col = String(col);
+      button.setAttribute('role', 'gridcell');
+      button.setAttribute('aria-label', `Word search row ${row + 1}, column ${col + 1}, letter ${letter}`);
+      button.addEventListener('click', () => chooseWordSearchCell(row, col));
+      host.appendChild(button);
+    }));
+
+    (wordsearch.words || []).forEach(word => {
+      const item = document.createElement('span');
+      item.textContent = word;
+      item.dataset.wordsearchWord = word;
+      bank.appendChild(item);
+    });
+    const count = document.querySelector('[data-wordsearch-count]');
+    if (count) count.textContent = `${wordsearch.words?.length || 0} words`;
+  };
+
+  const clearWordSearch = () => {
+    if (!wordSearchState) return;
+    wordSearchState.foundWords.clear();
+    wordSearchState.foundCells.clear();
+    wordSearchState.solutionCells.clear();
+    wordSearchState.start = null;
+    wordSearchState.showingSolution = false;
+    const reveal = document.querySelector('[data-puzzle-action="reveal-wordsearch"]');
+    if (reveal) reveal.textContent = 'Show solution';
+    setWordSearchStatus('Selection cleared.');
+    paintWordSearch();
+  };
+
+  const toggleWordSearchSolution = button => {
+    if (!wordSearchState || !button) return;
+    wordSearchState.showingSolution = !wordSearchState.showingSolution;
+    wordSearchState.start = null;
+    wordSearchState.solutionCells.clear();
+    if (wordSearchState.showingSolution) {
+      wordSearchState.placements.forEach(item => item.cells.forEach(cell => wordSearchState.solutionCells.add(`${cell.row}:${cell.col}`)));
+      setWordSearchStatus('Solution shown. Hide it to continue solving.');
+    } else {
+      setWordSearchStatus('Solution hidden.');
+    }
+    button.textContent = wordSearchState.showingSolution ? 'Hide solution' : 'Show solution';
+    paintWordSearch();
+  };
+
+  const checkPuzzle = (selector, statusSelector) => {
+    const host = document.querySelector(selector);
+    const status = document.querySelector(statusSelector);
+    if (!host) return;
+    let filled = 0;
+    let wrong = 0;
+    host.querySelectorAll('input:not(.is-given)').forEach(input => {
+      input.classList.remove('is-wrong','is-right');
+      const value = input.value.trim().toUpperCase();
+      if (!value) return;
+      filled += 1;
+      if (value === String(input.dataset.solution || '').toUpperCase()) input.classList.add('is-right');
+      else { input.classList.add('is-wrong'); wrong += 1; }
+    });
+    if (status) {
+      if (!filled) status.textContent = 'Fill in a few squares first.';
+      else if (wrong) status.textContent = `${wrong} filled square${wrong === 1 ? '' : 's'} need another look.`;
+      else status.textContent = 'Everything filled so far is correct.';
+    }
+  };
+
+  const togglePuzzleSolution = (selector, button, statusSelector) => {
+    const host = document.querySelector(selector);
+    const status = document.querySelector(statusSelector);
+    if (!host || !button) return;
+    const showing = button.dataset.showingSolution === 'true';
+    clearPuzzleCheckClasses(host);
+    host.querySelectorAll('input:not(.is-given)').forEach(input => {
+      if (!showing) {
+        input.dataset.userValue = input.value;
+        input.value = input.dataset.solution || '';
+        input.readOnly = true;
+        input.classList.add('is-solution');
+      } else {
+        input.value = input.dataset.userValue || '';
+        input.readOnly = false;
+        input.classList.remove('is-solution');
+      }
+    });
+    button.dataset.showingSolution = String(!showing);
+    button.textContent = showing ? 'Show solution' : 'Hide solution';
+    if (status) status.textContent = showing ? '' : 'Solution shown. Hide it to continue solving.';
+  };
+
+  const wirePuzzleActions = () => {
+    document.querySelector('[data-puzzle-action="check-sudoku"]')?.addEventListener('click', () => checkPuzzle('[data-sudoku-grid]', '[data-sudoku-status]'));
+    document.querySelector('[data-puzzle-action="reveal-sudoku"]')?.addEventListener('click', event => togglePuzzleSolution('[data-sudoku-grid]', event.currentTarget, '[data-sudoku-status]'));
+    document.querySelector('[data-puzzle-action="clear-wordsearch"]')?.addEventListener('click', clearWordSearch);
+    document.querySelector('[data-puzzle-action="reveal-wordsearch"]')?.addEventListener('click', event => toggleWordSearchSolution(event.currentTarget));
+  };
+
+  const loadWeeklyPuzzles = async () => {
+    const section = document.querySelector('[data-weekly-puzzles]');
+    if (!section) return;
+    const error = document.querySelector('[data-puzzle-error]');
+    try {
+      const response = await fetch(WEEKLY_PUZZLES_URL, {headers:{Accept:'application/json'}, cache:'no-store'});
+      if (!response.ok) throw new Error(`Puzzle feed returned ${response.status}`);
+      const payload = await response.json();
+      renderSudoku(payload.sudoku);
+      renderWordSearch(payload.wordsearch);
+      const issue = document.querySelector('[data-puzzle-issue]');
+      if (issue && payload.issue) issue.textContent = `Week of ${puzzleDateLabel(payload.issue.week_start)} • ${payload.issue.iso_week || ''}`;
+      if (error) error.hidden = true;
+    } catch (err) {
+      console.warn('Weekly puzzle feed unavailable.', err);
+      if (error) error.hidden = false;
+    }
+  };
+
   // Animated footer owl.
   document.querySelectorAll('.footer-owl-stage').forEach(owl => {
     const badge = owl.querySelector('.footer-owl-badge');
@@ -657,6 +915,8 @@
 
   loadPublishedEvents();
   loadWeeklyContent();
+  wirePuzzleActions();
+  loadWeeklyPuzzles();
   loadEventDetail();
 
   loadAdvertisements();
