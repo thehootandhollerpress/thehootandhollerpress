@@ -1,215 +1,215 @@
 {
   "schema_version": 2,
   "issue": {
-    "iso_week": "2026-W42",
-    "week_start": "2026-10-12",
-    "week_end": "2026-10-18",
-    "seed": "HHP-2026-W42-WORDSEARCH"
+    "iso_week": "2026-W43",
+    "week_start": "2026-10-19",
+    "week_end": "2026-10-25",
+    "seed": "HHP-2026-W43-WORDSEARCH"
   },
-  "generator_seed": "HHP-2026-W42-WORDSEARCH",
+  "generator_seed": "HHP-2026-W43-WORDSEARCH",
   "sudoku": {
     "difficulty": "medium",
     "clues": 36,
     "puzzle": [
       [
-        1,
-        0,
-        0,
-        3,
-        0,
-        0,
         6,
+        0,
+        4,
+        0,
+        0,
+        9,
+        0,
+        2,
+        0
+      ],
+      [
+        0,
+        0,
+        8,
+        0,
+        2,
+        0,
+        4,
         0,
         0
       ],
       [
         0,
-        3,
-        7,
+        5,
         0,
+        0,
+        0,
+        7,
+        8,
+        0,
+        9
+      ],
+      [
+        7,
+        4,
+        0,
+        0,
+        9,
+        0,
+        1,
+        0,
+        3
+      ],
+      [
         0,
         0,
         0,
         2,
+        7,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        8,
+        0,
+        1,
+        5,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        4,
+        2,
+        0,
+        0,
+        0,
+        0,
+        9,
+        3,
         1
       ],
       [
-        0,
-        0,
-        6,
-        2,
         8,
-        1,
+        6,
+        7,
+        9,
         0,
-        3,
-        4
+        0,
+        5,
+        4,
+        0
       ],
       [
         0,
         0,
         0,
-        1,
+        5,
         0,
-        7,
+        2,
         0,
-        4,
+        8,
         6
-      ],
-      [
-        7,
-        0,
-        0,
-        0,
-        3,
-        0,
-        9,
-        5,
-        0
-      ],
-      [
-        6,
-        0,
-        3,
-        0,
-        0,
-        8,
-        0,
-        1,
-        0
-      ],
-      [
-        0,
-        0,
-        0,
-        0,
-        5,
-        2,
-        1,
-        0,
-        0
-      ],
-      [
-        0,
-        7,
-        1,
-        0,
-        0,
-        9,
-        0,
-        0,
-        0
-      ],
-      [
-        0,
-        0,
-        0,
-        7,
-        0,
-        3,
-        4,
-        6,
-        9
       ]
     ],
     "solution": [
       [
-        1,
-        2,
-        8,
-        3,
+        6,
         7,
         4,
-        6,
+        8,
+        1,
         9,
+        3,
+        2,
         5
       ],
       [
-        4,
-        3,
-        7,
-        9,
-        6,
-        5,
-        8,
-        2,
-        1
-      ],
-      [
-        5,
-        9,
-        6,
-        2,
-        8,
         1,
-        7,
-        3,
-        4
-      ],
-      [
-        8,
-        5,
-        9,
-        1,
-        2,
-        7,
-        3,
-        4,
-        6
-      ],
-      [
-        7,
-        1,
-        2,
-        4,
-        3,
-        6,
-        9,
-        5,
-        8
-      ],
-      [
-        6,
-        4,
-        3,
-        5,
         9,
         8,
+        3,
         2,
-        1,
+        5,
+        4,
+        6,
         7
       ],
       [
-        9,
-        6,
-        4,
-        8,
-        5,
         2,
-        1,
+        5,
+        3,
+        4,
+        6,
         7,
+        8,
+        1,
+        9
+      ],
+      [
+        7,
+        4,
+        2,
+        6,
+        9,
+        8,
+        1,
+        5,
         3
       ],
       [
-        3,
-        7,
-        1,
-        6,
-        4,
-        9,
         5,
+        3,
+        1,
+        2,
+        7,
+        4,
+        6,
+        9,
+        8
+      ],
+      [
+        9,
         8,
+        6,
+        1,
+        5,
+        3,
+        2,
+        7,
+        4
+      ],
+      [
+        4,
+        2,
+        5,
+        7,
+        8,
+        6,
+        9,
+        3,
+        1
+      ],
+      [
+        8,
+        6,
+        7,
+        9,
+        3,
+        1,
+        5,
+        4,
         2
       ],
       [
-        2,
-        8,
-        5,
-        7,
-        1,
         3,
+        1,
+        9,
+        5,
         4,
-        6,
-        9
+        2,
+        7,
+        8,
+        6
       ]
     ]
   },
@@ -217,86 +217,152 @@
     "rows": 15,
     "cols": 15,
     "grid": [
-      "LALYXJSGCYYWUXK",
-      "XPYQLQCHANGECNH",
-      "HHUIUWANQREADER",
-      "TOAACYYWKRNNLEK",
-      "WNSJZKCGUCNTBRI",
-      "SHXWJKMADLQTDGC",
-      "PERCHEDRRXYFSXA",
-      "AEYELGAEEYVAXBE",
-      "UPBQZFQTPAKVVOA",
-      "VWFRTOOHOUCQWXS",
-      "GATROUTPORTTYFS",
-      "IHBPKKRPYNWEMAX",
-      "QAFUFVNQMBPDJZB",
-      "REDNEVALNJIHUUA",
-      "DDOZIZYOVWEOSYS"
+      "YQRDSZGULRKDTTP",
+      "MATPZQTBIIIUWNY",
+      "TKBUTMFUXNOIMID",
+      "LSMESBJJPBLCCFU",
+      "IAANGJPXWIATMFF",
+      "CSLOWDMUGCAVEUC",
+      "HVUXCLEHIJDWWMX",
+      "VRNERXTNVBWHSQF",
+      "EIAMECOUINZMVGT",
+      "LIEEKMHQYKFMVEF",
+      "DNLRRQEZNRCWNXX",
+      "DMCAQNHOJRIIKHB",
+      "ANHLDZDHNJBQUIR",
+      "PSEDHSEOWAGOHQU",
+      "OXTMIXYSCRCYVIT"
     ],
     "words": [
-      "BUS",
-      "CHANGE",
-      "DRAFT",
-      "EAGLE",
-      "GREEN",
-      "HOOT",
-      "LAVENDER",
-      "PERCHED",
-      "PORT",
-      "READER",
-      "SNAIL",
-      "SQUASH",
-      "TROUT",
-      "YOOPER"
+      "CABINET",
+      "CANOE",
+      "CAVE",
+      "CLEAN",
+      "COAST",
+      "EDGE",
+      "EMERALD",
+      "END",
+      "HARMONICA",
+      "LAMB",
+      "MUFFIN",
+      "PADDLE",
+      "QUICK",
+      "TWILIGHT"
     ],
     "placements": [
       {
-        "word": "BUS",
-        "start_row": 12,
-        "start_col": 14,
-        "end_row": 14,
-        "end_col": 12,
+        "word": "CABINET",
+        "start_row": 14,
+        "start_col": 8,
+        "end_row": 8,
+        "end_col": 14,
         "direction": [
-          1,
+          -1,
+          1
+        ]
+      },
+      {
+        "word": "CANOE",
+        "start_row": 14,
+        "start_col": 10,
+        "end_row": 10,
+        "end_col": 6,
+        "direction": [
+          -1,
           -1
         ]
       },
       {
-        "word": "CHANGE",
-        "start_row": 1,
-        "start_col": 6,
-        "end_row": 1,
-        "end_col": 11,
+        "word": "CAVE",
+        "start_row": 5,
+        "start_col": 9,
+        "end_row": 5,
+        "end_col": 12,
         "direction": [
           0,
           1
         ]
       },
       {
-        "word": "DRAFT",
-        "start_row": 5,
-        "start_col": 8,
-        "end_row": 9,
-        "end_col": 4,
+        "word": "CLEAN",
+        "start_row": 11,
+        "start_col": 2,
+        "end_row": 7,
+        "end_col": 2,
         "direction": [
-          1,
+          -1,
+          0
+        ]
+      },
+      {
+        "word": "COAST",
+        "start_row": 6,
+        "start_col": 4,
+        "end_row": 2,
+        "end_col": 0,
+        "direction": [
+          -1,
           -1
         ]
       },
       {
-        "word": "EAGLE",
-        "start_row": 7,
-        "start_col": 7,
-        "end_row": 7,
+        "word": "EDGE",
+        "start_row": 6,
+        "start_col": 6,
+        "end_row": 3,
         "end_col": 3,
         "direction": [
-          0,
+          -1,
           -1
         ]
       },
       {
-        "word": "GREEN",
+        "word": "EMERALD",
+        "start_row": 7,
+        "start_col": 3,
+        "end_row": 13,
+        "end_col": 3,
+        "direction": [
+          1,
+          0
+        ]
+      },
+      {
+        "word": "END",
+        "start_row": 13,
+        "start_col": 2,
+        "end_row": 11,
+        "end_col": 0,
+        "direction": [
+          -1,
+          -1
+        ]
+      },
+      {
+        "word": "HARMONICA",
+        "start_row": 12,
+        "start_col": 2,
+        "end_row": 4,
+        "end_col": 10,
+        "direction": [
+          -1,
+          1
+        ]
+      },
+      {
+        "word": "LAMB",
         "start_row": 5,
+        "start_col": 2,
+        "end_row": 2,
+        "end_col": 2,
+        "direction": [
+          -1,
+          0
+        ]
+      },
+      {
+        "word": "MUFFIN",
+        "start_row": 6,
         "start_col": 13,
         "end_row": 1,
         "end_col": 13,
@@ -306,102 +372,36 @@
         ]
       },
       {
-        "word": "HOOT",
-        "start_row": 9,
-        "start_col": 7,
-        "end_row": 9,
-        "end_col": 4,
-        "direction": [
-          0,
-          -1
-        ]
-      },
-      {
-        "word": "LAVENDER",
+        "word": "PADDLE",
         "start_row": 13,
-        "start_col": 7,
-        "end_row": 13,
+        "start_col": 0,
+        "end_row": 8,
         "end_col": 0,
-        "direction": [
-          0,
-          -1
-        ]
-      },
-      {
-        "word": "PERCHED",
-        "start_row": 6,
-        "start_col": 0,
-        "end_row": 6,
-        "end_col": 6,
-        "direction": [
-          0,
-          1
-        ]
-      },
-      {
-        "word": "PORT",
-        "start_row": 10,
-        "start_col": 7,
-        "end_row": 10,
-        "end_col": 10,
-        "direction": [
-          0,
-          1
-        ]
-      },
-      {
-        "word": "READER",
-        "start_row": 2,
-        "start_col": 9,
-        "end_row": 2,
-        "end_col": 14,
-        "direction": [
-          0,
-          1
-        ]
-      },
-      {
-        "word": "SNAIL",
-        "start_row": 5,
-        "start_col": 0,
-        "end_row": 1,
-        "end_col": 4,
-        "direction": [
-          -1,
-          1
-        ]
-      },
-      {
-        "word": "SQUASH",
-        "start_row": 0,
-        "start_col": 6,
-        "end_row": 5,
-        "end_col": 1,
-        "direction": [
-          1,
-          -1
-        ]
-      },
-      {
-        "word": "TROUT",
-        "start_row": 10,
-        "start_col": 2,
-        "end_row": 10,
-        "end_col": 6,
-        "direction": [
-          0,
-          1
-        ]
-      },
-      {
-        "word": "YOOPER",
-        "start_row": 11,
-        "start_col": 8,
-        "end_row": 6,
-        "end_col": 8,
         "direction": [
           -1,
           0
+        ]
+      },
+      {
+        "word": "QUICK",
+        "start_row": 13,
+        "start_col": 13,
+        "end_row": 9,
+        "end_col": 9,
+        "direction": [
+          -1,
+          -1
+        ]
+      },
+      {
+        "word": "TWILIGHT",
+        "start_row": 0,
+        "start_col": 13,
+        "end_row": 7,
+        "end_col": 6,
+        "direction": [
+          1,
+          -1
         ]
       }
     ]
