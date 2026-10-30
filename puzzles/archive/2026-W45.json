@@ -1,0 +1,409 @@
+{
+  "schema_version": 2,
+  "issue": {
+    "iso_week": "2026-W45",
+    "week_start": "2026-11-02",
+    "week_end": "2026-11-08",
+    "seed": "HHP-2026-W45-WORDSEARCH"
+  },
+  "generator_seed": "HHP-2026-W45-WORDSEARCH",
+  "sudoku": {
+    "difficulty": "medium",
+    "clues": 36,
+    "puzzle": [
+      [
+        4,
+        0,
+        7,
+        0,
+        0,
+        5,
+        0,
+        0,
+        1
+      ],
+      [
+        0,
+        0,
+        3,
+        8,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        2,
+        0,
+        0,
+        7,
+        9,
+        0,
+        0,
+        5,
+        0
+      ],
+      [
+        0,
+        4,
+        0,
+        0,
+        5,
+        3,
+        0,
+        8,
+        2
+      ],
+      [
+        3,
+        5,
+        9,
+        6,
+        2,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        8,
+        0,
+        6,
+        1,
+        4,
+        0,
+        0,
+        0,
+        5
+      ],
+      [
+        1,
+        7,
+        0,
+        0,
+        0,
+        0,
+        0,
+        6,
+        0
+      ],
+      [
+        9,
+        0,
+        0,
+        0,
+        8,
+        0,
+        2,
+        0,
+        0
+      ],
+      [
+        0,
+        8,
+        0,
+        2,
+        7,
+        0,
+        4,
+        0,
+        0
+      ]
+    ],
+    "solution": [
+      [
+        4,
+        9,
+        7,
+        3,
+        6,
+        5,
+        8,
+        2,
+        1
+      ],
+      [
+        5,
+        6,
+        3,
+        8,
+        1,
+        2,
+        7,
+        4,
+        9
+      ],
+      [
+        2,
+        1,
+        8,
+        7,
+        9,
+        4,
+        3,
+        5,
+        6
+      ],
+      [
+        7,
+        4,
+        1,
+        9,
+        5,
+        3,
+        6,
+        8,
+        2
+      ],
+      [
+        3,
+        5,
+        9,
+        6,
+        2,
+        8,
+        1,
+        7,
+        4
+      ],
+      [
+        8,
+        2,
+        6,
+        1,
+        4,
+        7,
+        9,
+        3,
+        5
+      ],
+      [
+        1,
+        7,
+        2,
+        4,
+        3,
+        9,
+        5,
+        6,
+        8
+      ],
+      [
+        9,
+        3,
+        4,
+        5,
+        8,
+        6,
+        2,
+        1,
+        7
+      ],
+      [
+        6,
+        8,
+        5,
+        2,
+        7,
+        1,
+        4,
+        9,
+        3
+      ]
+    ]
+  },
+  "wordsearch": {
+    "rows": 15,
+    "cols": 15,
+    "grid": [
+      "JXIMFKOBZDOLOKQ",
+      "WEIVRETNIXERVOJ",
+      "LGUJQKNEXTAZATL",
+      "YNJTFECATEROOBD",
+      "NALIRBOULPQFMGI",
+      "XRDARWCUIMXZCHC",
+      "YOUPNEOCHHVTOPH",
+      "OQXTJRNYYRCURMO",
+      "SIUXEIUFVMETMZS",
+      "HGBFCRTTBLUNOLC",
+      "VFNSHLXSCQANROI",
+      "ESUOMKIRUOFZAON",
+      "LJFATSYRUPNNNTC",
+      "FVVOAETUNIMDTXU",
+      "JNOVEMBERHXTRMH"
+    ],
+    "words": [
+      "COCONUT",
+      "CORMORANT",
+      "CORNER",
+      "INTERVIEW",
+      "LETTUCE",
+      "MINUTE",
+      "MOUSE",
+      "NOCTURNAL",
+      "NOVEMBER",
+      "ORANGE",
+      "PICNIC",
+      "RETURN",
+      "SQUARE",
+      "SYRUP"
+    ],
+    "placements": [
+      {
+        "word": "COCONUT",
+        "start_row": 3,
+        "start_col": 6,
+        "end_row": 9,
+        "end_col": 6,
+        "direction": [
+          1,
+          0
+        ]
+      },
+      {
+        "word": "CORMORANT",
+        "start_row": 5,
+        "start_col": 12,
+        "end_row": 13,
+        "end_col": 12,
+        "direction": [
+          1,
+          0
+        ]
+      },
+      {
+        "word": "CORNER",
+        "start_row": 12,
+        "start_col": 14,
+        "end_row": 7,
+        "end_col": 9,
+        "direction": [
+          -1,
+          -1
+        ]
+      },
+      {
+        "word": "INTERVIEW",
+        "start_row": 1,
+        "start_col": 8,
+        "end_row": 1,
+        "end_col": 0,
+        "direction": [
+          0,
+          -1
+        ]
+      },
+      {
+        "word": "LETTUCE",
+        "start_row": 0,
+        "start_col": 11,
+        "end_row": 6,
+        "end_col": 5,
+        "direction": [
+          1,
+          -1
+        ]
+      },
+      {
+        "word": "MINUTE",
+        "start_row": 13,
+        "start_col": 10,
+        "end_row": 13,
+        "end_col": 5,
+        "direction": [
+          0,
+          -1
+        ]
+      },
+      {
+        "word": "MOUSE",
+        "start_row": 11,
+        "start_col": 4,
+        "end_row": 11,
+        "end_col": 0,
+        "direction": [
+          0,
+          -1
+        ]
+      },
+      {
+        "word": "NOCTURNAL",
+        "start_row": 12,
+        "start_col": 10,
+        "end_row": 4,
+        "end_col": 2,
+        "direction": [
+          -1,
+          -1
+        ]
+      },
+      {
+        "word": "NOVEMBER",
+        "start_row": 14,
+        "start_col": 1,
+        "end_row": 14,
+        "end_col": 8,
+        "direction": [
+          0,
+          1
+        ]
+      },
+      {
+        "word": "ORANGE",
+        "start_row": 6,
+        "start_col": 1,
+        "end_row": 1,
+        "end_col": 1,
+        "direction": [
+          -1,
+          0
+        ]
+      },
+      {
+        "word": "PICNIC",
+        "start_row": 4,
+        "start_col": 9,
+        "end_row": 9,
+        "end_col": 4,
+        "direction": [
+          1,
+          -1
+        ]
+      },
+      {
+        "word": "RETURN",
+        "start_row": 9,
+        "start_col": 5,
+        "end_row": 4,
+        "end_col": 0,
+        "direction": [
+          -1,
+          -1
+        ]
+      },
+      {
+        "word": "SQUARE",
+        "start_row": 8,
+        "start_col": 0,
+        "end_row": 3,
+        "end_col": 5,
+        "direction": [
+          -1,
+          1
+        ]
+      },
+      {
+        "word": "SYRUP",
+        "start_row": 12,
+        "start_col": 5,
+        "end_row": 12,
+        "end_col": 9,
+        "direction": [
+          0,
+          1
+        ]
+      }
+    ]
+  }
+}
