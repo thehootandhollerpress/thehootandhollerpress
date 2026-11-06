@@ -1,0 +1,409 @@
+{
+  "schema_version": 2,
+  "issue": {
+    "iso_week": "2026-W46",
+    "week_start": "2026-11-09",
+    "week_end": "2026-11-15",
+    "seed": "HHP-2026-W46-WORDSEARCH"
+  },
+  "generator_seed": "HHP-2026-W46-WORDSEARCH",
+  "sudoku": {
+    "difficulty": "medium",
+    "clues": 36,
+    "puzzle": [
+      [
+        0,
+        0,
+        0,
+        5,
+        0,
+        8,
+        3,
+        0,
+        0
+      ],
+      [
+        8,
+        0,
+        0,
+        3,
+        2,
+        0,
+        0,
+        1,
+        4
+      ],
+      [
+        0,
+        2,
+        3,
+        9,
+        1,
+        0,
+        5,
+        0,
+        0
+      ],
+      [
+        3,
+        7,
+        6,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        9,
+        0,
+        2,
+        0,
+        0,
+        0,
+        6,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        1,
+        0,
+        7,
+        3,
+        0,
+        4,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        4,
+        5,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        5,
+        0,
+        0,
+        0,
+        6,
+        0,
+        9,
+        2
+      ],
+      [
+        0,
+        3,
+        8,
+        7,
+        9,
+        2,
+        4,
+        0,
+        1
+      ]
+    ],
+    "solution": [
+      [
+        4,
+        1,
+        9,
+        5,
+        6,
+        8,
+        3,
+        2,
+        7
+      ],
+      [
+        8,
+        6,
+        5,
+        3,
+        2,
+        7,
+        9,
+        1,
+        4
+      ],
+      [
+        7,
+        2,
+        3,
+        9,
+        1,
+        4,
+        5,
+        6,
+        8
+      ],
+      [
+        3,
+        7,
+        6,
+        2,
+        4,
+        9,
+        1,
+        8,
+        5
+      ],
+      [
+        9,
+        4,
+        2,
+        1,
+        8,
+        5,
+        6,
+        7,
+        3
+      ],
+      [
+        5,
+        8,
+        1,
+        6,
+        7,
+        3,
+        2,
+        4,
+        9
+      ],
+      [
+        2,
+        9,
+        7,
+        4,
+        5,
+        1,
+        8,
+        3,
+        6
+      ],
+      [
+        1,
+        5,
+        4,
+        8,
+        3,
+        6,
+        7,
+        9,
+        2
+      ],
+      [
+        6,
+        3,
+        8,
+        7,
+        9,
+        2,
+        4,
+        5,
+        1
+      ]
+    ]
+  },
+  "wordsearch": {
+    "rows": 15,
+    "cols": 15,
+    "grid": [
+      "LEOLKUQWCVKARJH",
+      "VTYRSQUUQCHEERS",
+      "AYXYEYESUSRRTBX",
+      "CZDJDASDBLLBPGL",
+      "VTGTZCTUQHBROTX",
+      "METPRNIHBRKJCXU",
+      "KAPVXZOAOGTAIVK",
+      "UCEHKUNCGTDSLAE",
+      "KHOFMRCBWYONECJ",
+      "MENRHOGNIPPOHCQ",
+      "YRYWLDYZSESWIZM",
+      "URGIDTTTEFYYXWR",
+      "MWOCARDINALOQSO",
+      "WEDONXNHOCEWIDT",
+      "RMETTEZAGEMLSHS"
+    ],
+    "words": [
+      "BROCCOLI",
+      "CARDINAL",
+      "CHOPPING",
+      "DESK",
+      "DUCK",
+      "GAZETTE",
+      "HELICOPTER",
+      "PEONY",
+      "QUESTION",
+      "ROOT",
+      "SNOWYOWL",
+      "STORM",
+      "TEACHER",
+      "TYPEFACE"
+    ],
+    "placements": [
+      {
+        "word": "BROCCOLI",
+        "start_row": 4,
+        "start_col": 10,
+        "end_row": 11,
+        "end_col": 3,
+        "direction": [
+          1,
+          -1
+        ]
+      },
+      {
+        "word": "CARDINAL",
+        "start_row": 12,
+        "start_col": 3,
+        "end_row": 12,
+        "end_col": 10,
+        "direction": [
+          0,
+          1
+        ]
+      },
+      {
+        "word": "CHOPPING",
+        "start_row": 9,
+        "start_col": 13,
+        "end_row": 9,
+        "end_col": 6,
+        "direction": [
+          0,
+          -1
+        ]
+      },
+      {
+        "word": "DESK",
+        "start_row": 3,
+        "start_col": 4,
+        "end_row": 0,
+        "end_col": 4,
+        "direction": [
+          -1,
+          0
+        ]
+      },
+      {
+        "word": "DUCK",
+        "start_row": 3,
+        "start_col": 7,
+        "end_row": 0,
+        "end_col": 10,
+        "direction": [
+          -1,
+          1
+        ]
+      },
+      {
+        "word": "GAZETTE",
+        "start_row": 14,
+        "start_col": 8,
+        "end_row": 14,
+        "end_col": 2,
+        "direction": [
+          0,
+          -1
+        ]
+      },
+      {
+        "word": "HELICOPTER",
+        "start_row": 9,
+        "start_col": 12,
+        "end_row": 0,
+        "end_col": 12,
+        "direction": [
+          -1,
+          0
+        ]
+      },
+      {
+        "word": "PEONY",
+        "start_row": 6,
+        "start_col": 2,
+        "end_row": 10,
+        "end_col": 2,
+        "direction": [
+          1,
+          0
+        ]
+      },
+      {
+        "word": "QUESTION",
+        "start_row": 0,
+        "start_col": 6,
+        "end_row": 7,
+        "end_col": 6,
+        "direction": [
+          1,
+          0
+        ]
+      },
+      {
+        "word": "ROOT",
+        "start_row": 11,
+        "start_col": 1,
+        "end_row": 14,
+        "end_col": 4,
+        "direction": [
+          1,
+          1
+        ]
+      },
+      {
+        "word": "SNOWYOWL",
+        "start_row": 7,
+        "start_col": 11,
+        "end_row": 14,
+        "end_col": 11,
+        "direction": [
+          1,
+          0
+        ]
+      },
+      {
+        "word": "STORM",
+        "start_row": 14,
+        "start_col": 14,
+        "end_row": 10,
+        "end_col": 14,
+        "direction": [
+          -1,
+          0
+        ]
+      },
+      {
+        "word": "TEACHER",
+        "start_row": 4,
+        "start_col": 1,
+        "end_row": 10,
+        "end_col": 1,
+        "direction": [
+          1,
+          0
+        ]
+      },
+      {
+        "word": "TYPEFACE",
+        "start_row": 7,
+        "start_col": 9,
+        "end_row": 14,
+        "end_col": 9,
+        "direction": [
+          1,
+          0
+        ]
+      }
+    ]
+  }
+}
