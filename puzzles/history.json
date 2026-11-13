@@ -241,6 +241,28 @@
         "TEACHER",
         "TYPEFACE"
       ]
+    },
+    "2026-W47": {
+      "week_start": "2026-11-16",
+      "archive": "archive/2026-W47.json",
+      "sudoku_hash": "3933b58fab232c6a2ea71774e46a006b0f94aac047e8e1cf09c694f4a4dcc11f",
+      "wordsearch_hash": "8c5273d761cc7e7526641e96117620c118e43e8b49e69c31a634edcc65914c12",
+      "wordsearch_words": [
+        "ACTOR",
+        "BASEMENT",
+        "CHAMPION",
+        "CHORD",
+        "CLIFF",
+        "GRADUATION",
+        "JULY",
+        "LUCKY",
+        "PENCIL",
+        "PRETZEL",
+        "ROOF",
+        "TERN",
+        "WALTZ",
+        "WOODPECKER"
+      ]
     }
   },
   "sudoku_hashes": [
@@ -255,7 +277,8 @@
     "41fde38b8b8c96421155a946776d3567bce0c542467c7b47834fab67301b4da3",
     "280696dcaff3ef9f9c6e343bf0af42236e1863480de35fba002414eaf96e49e7",
     "15a16c8cf97442b907c947e93cccaf7ec0d57bde16ce0e585bd3769c8d8590e0",
-    "81981ad8eb5e4f4f6b2dce612c0fb78f10895c08107eca16120f5761a284b2ed"
+    "81981ad8eb5e4f4f6b2dce612c0fb78f10895c08107eca16120f5761a284b2ed",
+    "3933b58fab232c6a2ea71774e46a006b0f94aac047e8e1cf09c694f4a4dcc11f"
   ],
   "wordsearch_hashes": [
     "403405c0a13fd0ec847f57e1a1c267696a8bea4f5fc6a12f782c6379a0396ae0",
@@ -268,6 +291,7 @@
     "8304e600ce8eaea74d140b4d28cb57c5868718050e8da6b41de33170d75bd424",
     "4f30a6befff4c8d1d0617773e21607e45778f4d7ba225adc2cf3e5a0ac58d09c",
     "eaaffdfa9021fa93b6a80da4dc372dd87b547406f7113958eaa231cc16d48ea1",
-    "c3902acd3726101e60a052158dd22c8b509613a0272a771fbe7f8a7961527ed9"
+    "c3902acd3726101e60a052158dd22c8b509613a0272a771fbe7f8a7961527ed9",
+    "8c5273d761cc7e7526641e96117620c118e43e8b49e69c31a634edcc65914c12"
   ]
 }
