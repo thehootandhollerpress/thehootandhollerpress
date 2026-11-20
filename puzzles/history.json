@@ -263,6 +263,28 @@
         "WALTZ",
         "WOODPECKER"
       ]
+    },
+    "2026-W48": {
+      "week_start": "2026-11-23",
+      "archive": "archive/2026-W48.json",
+      "sudoku_hash": "375101200583cd9ccf74db7057354de301e994fc66e43a304bed3f2958d83e78",
+      "wordsearch_hash": "7633093b38486d47d2f4a9380bfe3de3983b9bd6db85d17fb47915eaef0e7f73",
+      "wordsearch_words": [
+        "ART",
+        "CLAM",
+        "COUNTRY",
+        "FOOTBALL",
+        "FREEZER",
+        "GIVE",
+        "GLAD",
+        "OPEN",
+        "OVEN",
+        "RIVER",
+        "ROOST",
+        "STCLAIR",
+        "TOMATO",
+        "WORD"
+      ]
     }
   },
   "sudoku_hashes": [
@@ -278,7 +300,8 @@
     "280696dcaff3ef9f9c6e343bf0af42236e1863480de35fba002414eaf96e49e7",
     "15a16c8cf97442b907c947e93cccaf7ec0d57bde16ce0e585bd3769c8d8590e0",
     "81981ad8eb5e4f4f6b2dce612c0fb78f10895c08107eca16120f5761a284b2ed",
-    "3933b58fab232c6a2ea71774e46a006b0f94aac047e8e1cf09c694f4a4dcc11f"
+    "3933b58fab232c6a2ea71774e46a006b0f94aac047e8e1cf09c694f4a4dcc11f",
+    "375101200583cd9ccf74db7057354de301e994fc66e43a304bed3f2958d83e78"
   ],
   "wordsearch_hashes": [
     "403405c0a13fd0ec847f57e1a1c267696a8bea4f5fc6a12f782c6379a0396ae0",
@@ -292,6 +315,7 @@
     "4f30a6befff4c8d1d0617773e21607e45778f4d7ba225adc2cf3e5a0ac58d09c",
     "eaaffdfa9021fa93b6a80da4dc372dd87b547406f7113958eaa231cc16d48ea1",
     "c3902acd3726101e60a052158dd22c8b509613a0272a771fbe7f8a7961527ed9",
-    "8c5273d761cc7e7526641e96117620c118e43e8b49e69c31a634edcc65914c12"
+    "8c5273d761cc7e7526641e96117620c118e43e8b49e69c31a634edcc65914c12",
+    "7633093b38486d47d2f4a9380bfe3de3983b9bd6db85d17fb47915eaef0e7f73"
   ]
 }
